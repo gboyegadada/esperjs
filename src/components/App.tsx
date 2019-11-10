@@ -29,7 +29,7 @@ class App extends Component<Props> {
               <span>{power.on ? 'ON' : 'OFF'}</span>
             </div>
             <p>
-              Edit <code>src/App.js</code> and save to reload.
+              <code>&nbsp;</code>
             </p>
           </header>
         </div>
