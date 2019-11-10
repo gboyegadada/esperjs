@@ -1,0 +1,27 @@
+{
+  "name": "esperjs",
+  "version": "1.0.0",
+  "description": "ESPER Machine",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gboyegadada/esperjs.git"
+  },
+  "keywords": [
+    "javascript",
+    "react",
+    "html5",
+    "voice recognition",
+    "esper",
+    "blade runner"
+  ],
+  "author": "Gboyega Dada <boyega@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gboyegadada/esperjs/issues"
+  },
+  "homepage": "https://github.com/gboyegadada/esperjs#readme"
+}
