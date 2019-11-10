@@ -19,7 +19,6 @@
   "bugs": {
     "url": "https://github.com/gboyegadada/esperjs/issues"
   },
-  "homepage": "https://github.com/gboyegadada/esperjs#readme",
   "dependencies": {
     "@types/jest": "24.0.22",
     "@types/node": "12.12.7",
