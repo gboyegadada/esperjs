@@ -24,9 +24,9 @@ class App extends Component<Props> {
       return (
         <div className="App">
           <header className="App-header">
-            <div className='d-flex flex-row justify-content-start'>
-              <MdPowerSettingsNew size={30} className={`btn-power ${power.on && 'on'}`} onClick={this.togglePower}/>
-              <span>{power.on ? 'ON' : 'OFF'}</span>
+            <div className={`d-flex flex-row justify-content-start btn btn-power ${power.on && 'on'}`} onClick={this.togglePower}>
+              <MdPowerSettingsNew size={30} />
+              <span className='ml-1'>{power.on ? 'ON' : 'OFF'}</span>
             </div>
             <p>
               <code>&nbsp;</code>

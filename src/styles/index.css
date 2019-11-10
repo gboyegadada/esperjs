@@ -12,13 +12,24 @@ code {
     monospace;
 }
 
-.btn-power {
+.btn {
   cursor: pointer;
+}
+
+.btn span {
+  color: #3e4450;
+}
+
+.btn.on span {
+  color: #717681;
+}
+
+.btn.btn-power svg {
   color: #3e4450;
   transition: color 200ms;
 }
 
-.btn-power.on {
+.btn.btn-power.on svg {
   color: rgb(118, 187, 27);
 }
 
@@ -40,4 +51,12 @@ code {
 
 .justify-content-between {
   justify-content: space-between;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.ml-1 {
+  margin-left: 0.3rem!important;
 }
