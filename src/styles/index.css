@@ -11,3 +11,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.btn-power {
+  cursor: pointer;
+  color: #3e4450;
+  transition: color 200ms;
+}
+
+.btn-power.on {
+  color: rgb(118, 187, 27);
+}
+
+.d-flex {
+  display: flex!important;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-content-start {
+  justify-content: start;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
