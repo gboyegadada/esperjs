@@ -3,6 +3,7 @@ import { command } from '../utils/speechRecognition'
 export const PROCESS_COMMAND = 'PROCESS_COMMAND'
 export const RECEIVE_COMMAND = 'RECEIVE_COMMAND'
 export const INVALID_COMMAND = 'INVALID_COMMAND'
+export const READY = 'READY'
 export const COM_MOVE_LEFT = 'COM_MOVE_LEFT'
 export const COM_MOVE_RIGHT = 'COM_MOVE_RIGHT'
 export const COM_MOVE_UP = 'COM_MOVE_UP'
@@ -35,6 +36,12 @@ export function invalidCommand (result: SpeechRecognitionResult) {
     return {
         type: INVALID_COMMAND,
         result,
+    }
+}
+
+export function ready () {
+    return {
+        type: READY,
     }
 }
 

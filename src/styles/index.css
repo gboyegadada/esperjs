@@ -33,6 +33,22 @@ code {
   color: rgb(118, 187, 27);
 }
 
+.led {
+  font-size: 1.3em;
+}
+
+.led.led-sleep {
+  color: gray;
+}
+
+.led.led-success {
+  color: rgb(59, 211, 59);
+}
+
+.led.led-danger {
+  color: rgb(214, 46, 46);
+}
+
 .d-flex {
   display: flex!important;
 }

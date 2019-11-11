@@ -8,6 +8,7 @@ import { Dispatch } from 'redux';
 import { togglePower } from '../actions/power';
 import SpeechRecognition from '../utils/speechRecognition'
 import Console from './Console';
+import Indicator from './Indicator';
 
 interface Props {
   power: PowerState
@@ -41,6 +42,7 @@ class App extends Component<Props> {
               <MdPowerSettingsNew size={30} />
               <span className='ml-1'>{power.on ? 'ON' : 'OFF'}</span>
             </div>
+            <Indicator successClassName='led led-success' dangerClassName='led led-danger'/>
             <Console />
           </header>
         </div>

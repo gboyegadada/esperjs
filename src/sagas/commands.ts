@@ -1,7 +1,7 @@
-import { put, takeLatest } from 'redux-saga/effects'
+import { put, takeLatest, delay } from 'redux-saga/effects'
 import { ProcessCommandAction } from '../types/action';
 import { lookup } from '../utils/speechRecognition';
-import { receiveCommand } from '../actions/commands';
+import { receiveCommand, ready, invalidCommand } from '../actions/commands';
 import { store } from '..';
 
 // worker Saga: will be fired on PROCESS_COMMAND actions
@@ -16,14 +16,17 @@ function* processCommand(action: ProcessCommandAction) {
     }
 
     const command = lookup(action.result)
-    if (command && (lastCommand !== command.command && ago > 1000)) {
+    if (command && (lastCommand !== command.command && ago > 600)) {
         yield put(receiveCommand(command))
         yield put({ type: command.action })
     } else if (command && undefined !== command) {
         console.log('SKIP_COMMAND', command, ago)
     } else {
-        console.log('INVALID_COMMAND', action.result)
+        yield put(invalidCommand(action.result))
     }
+
+    yield delay(700)
+    yield put(ready())
 }
 
 function* rootSaga() {

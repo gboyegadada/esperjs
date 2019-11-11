@@ -9,6 +9,12 @@ export interface CommandState {
     timestamp: number
 }
 
+export enum ReceivedState {
+    Ready,
+    Failed,
+    Success
+}
+
 /**
  * Will return something like:
  * {
