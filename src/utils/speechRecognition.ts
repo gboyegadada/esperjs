@@ -1,23 +1,34 @@
 import { store } from "..";
 import { 
   processCommand, 
-  COM_TRACK_LEFT, 
-  COM_TRACK_RIGHT, 
-  COM_PAN_LEFT, 
-  COM_PAN_RIGHT, 
-  COM_STOP
+  COM_MOVE_LEFT, 
+  COM_MOVE_RIGHT, 
+  COM_MOVE_UP, 
+  COM_MOVE_DOWN, 
+  COM_STOP,
+  COM_HELP,
+  COM_ENHANCE,
+  COM_CENTER,
+  COM_ZOOM_IN,
+  COM_ZOOM_OUT
 } from "../actions/commands";
 
 export interface command {
   command: string
+  keywords: string[]
   action: string
 } 
 const vocab: command[] = [
-  { command: 'track left', action: COM_TRACK_LEFT },
-  { command: 'track right', action: COM_TRACK_RIGHT },
-  { command: 'pan left', action: COM_PAN_LEFT },
-  { command: 'pan right', action: COM_PAN_RIGHT },
-  { command: 'stop', action: COM_STOP }
+  { command: 'move left', keywords: ['left', 'lift', 'trackleft', 'tracklist', 'panleft', 'penlist', 'panelist', 'palette', 'palate', 'padlet', 'pilot'], action: COM_MOVE_LEFT },
+  { command: 'move right', keywords: ['right', 'wright', 'write', 'trackrite', 'trackright', 'ride', 'penrite'], action: COM_MOVE_RIGHT },
+  { command: 'move up', keywords: ['up', 'move-up', 'Up', 'hope'], action: COM_MOVE_UP },
+  { command: 'move down', keywords: ['down', 'gown', 'brown', 'dawn'], action: COM_MOVE_DOWN },
+  { command: 'zoom in', keywords: ['in'], action: COM_ZOOM_IN },
+  { command: 'zoom out', keywords: ['out'], action: COM_ZOOM_OUT },
+  { command: 'stop', keywords: ['stop', 'wait', 'hold', 'ho', 'hoe', 'holdon'], action: COM_STOP },
+  { command: 'help', keywords: ['help'], action: COM_HELP },
+  { command: 'enhance', keywords: ['enhance', 'hands', 'hand', 'han', 'hun'], action: COM_ENHANCE },
+  { command: 'center', keywords: ['center'], action: COM_CENTER }
 ]
 
 window.SpeechRecognition = (window as any).webkitSpeechRecognition || window.SpeechRecognition;
@@ -28,12 +39,12 @@ if ('SpeechRecognition' in window) {
     // speech recognition API supported
     recognition = new window.SpeechRecognition();
 
-    recognition.interimResults = true;
+    recognition.interimResults = false;
     recognition.maxAlternatives = 10;
     recognition.continuous = true;
 
     recognition.onresult = function(event) { 
-      store.dispatch(processCommand(event.results[event.results.length-1]))
+      store.dispatch(processCommand(event.results[event.resultIndex]))
 
       console.group('RECOGNITION')
       console.log(event) 
@@ -53,7 +64,7 @@ export default recognition
  */
 export const lookup = (result: SpeechRecognitionResult) => {
   for (let i = 0; i < vocab.length; i++) {
-    if (match(vocab[i].command, result)) return vocab[i]
+    if (match(vocab[i].keywords, result)) return vocab[i]
   }
 
   return null
@@ -65,12 +76,11 @@ export const lookup = (result: SpeechRecognitionResult) => {
  * @param command 
  * @param alternatives 
  */
-const match = (command: string, alternatives: SpeechRecognitionResult) => {
-  const words: string[] = command.split(' ')
+const match = (keywords: string[], alternatives: SpeechRecognitionResult) => {
   for (let i = 0; i < alternatives.length; i++) {
-    let intersection = intersect(words, alternatives[i].transcript.split(' '))
+    let intersection = intersect(keywords, alternatives[i].transcript.split(' '))
 
-    if (intersection.length === words.length) return true
+    if (intersection.length >= 1) return true
   }
 
   return false

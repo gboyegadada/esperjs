@@ -4,13 +4,16 @@ export interface PowerState {
     on: boolean
 }
 
-export type CommandsState = string[]
+export interface CommandState {
+    command: string
+    timestamp: number
+}
 
 /**
  * Will return something like:
  * {
  *    power: PowerState
- *    commands: CommandsState
+ *    commands: CommandState[]
  * }
  */
 export type AppState = ReturnType<typeof rootReducer>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { CommandsState } from '../types/state';
+import { CommandState } from '../types/state';
 import { connect } from 'react-redux';
 
 interface Props {
-    commands: CommandsState
+    commands: CommandState[]
 }
 
 export function Console ({ commands }: Props) {
@@ -12,7 +12,7 @@ export function Console ({ commands }: Props) {
           <code>
             <ul>
               {commands.map((com, k) => (
-                <li key={k}>{com}</li>
+                <li key={k}>{com.command}</li>
               ))}
             </ul>
           </code>
@@ -20,4 +20,4 @@ export function Console ({ commands }: Props) {
         )
 }
 
-export default connect(({ commands }: { commands: CommandsState }) => ({ commands }))(Console)
+export default connect(({ commands }: { commands: CommandState[] }) => ({ commands }))(Console)
