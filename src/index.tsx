@@ -7,9 +7,12 @@ import App from './components/App';
 // import * as serviceWorker from './serviceWorker';
 
 import reducer from './reducers'
-import middleware from './middleware'
+import middleware, { sagaMiddleware } from './middleware'
+import rootSaga from './sagas/commands';
 
-const store = createStore(reducer, middleware)
+export const store = createStore(reducer, middleware)
+
+sagaMiddleware.run(rootSaga)
 
 
 ReactDOM.render(

@@ -1,8 +1,13 @@
-import { TogglePowerAction, ActionTypes } from '../types/action'
+import { TogglePowerAction, TOGGLE_POWER } from '../types/action'
+import { PowerState } from '../types/state'
 
-export default function power (state = { on: false }, action: TogglePowerAction) {
+const initialState: PowerState = {
+    on: false
+}
+
+export default function power (state = initialState, action: TogglePowerAction) {
     switch(action.type) {
-        case ActionTypes.TOGGLE_POWER:
+        case TOGGLE_POWER:
             return { on: !state.on }
         default:
             return state

@@ -1,6 +1,9 @@
 import { applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import createSagaMiddleware from '@redux-saga/core'
 
 import logger from './logger'
 
-export default applyMiddleware(thunk, logger)
+// create the saga middleware
+export const sagaMiddleware = createSagaMiddleware()
+
+export default applyMiddleware(sagaMiddleware, logger)

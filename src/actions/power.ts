@@ -1,7 +1,7 @@
-import { ActionTypes } from "../types/action"
+import { TogglePowerAction, TOGGLE_POWER } from "../types/action"
 
-export function togglePower () {
+export function togglePower (): TogglePowerAction {
     return {
-        type: ActionTypes.TOGGLE_POWER,
+        type: TOGGLE_POWER,
     }
 }
