@@ -11,9 +11,15 @@ import {
     COM_MOVE_DOWN, 
     COM_ZOOM_IN, 
     COM_ZOOM_OUT, 
-    READY 
+    READY, 
+    CONFIRM,
+    OKAY,
+    CANCEL,
+    CLEAR_CONFIRM,
+    CLEAR_COMMANDS
 } from "../actions/commands"
-import { CommandState } from "./state"
+import { CommandState, ConfirmState } from "./state"
+import { AnyAction } from "redux"
 
 export const TOGGLE_POWER = 'TOGGLE_POWER'
 
@@ -37,8 +43,29 @@ export interface InvalidCommandAction {
     result: SpeechRecognitionResult
 }
 
+export interface ClearCommandsAction {
+    type: typeof CLEAR_COMMANDS
+}
+
 export interface ReadyAction {
     type: typeof READY
+}
+
+export interface ConfirmAction {
+    type: typeof CONFIRM,
+    payload: ConfirmState
+}
+
+export interface ClearConfirmAction {
+    type: typeof CLEAR_CONFIRM,
+}
+
+export interface OkayAction {
+    type: typeof OKAY
+}
+
+export interface CancelAction {
+    type: typeof CANCEL
 }
 
 export interface ComMoveLeftAction {
@@ -78,4 +105,5 @@ export interface ComEnhanceAction {
 }
 
 export type PowerActionTypes = TogglePowerAction
-export type CommandActionTypes = ProcessCommandAction | ReceiveCommandAction | InvalidCommandAction | ReadyAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComZoomInAction | ComZoomOutAction | ComStopAction | ComHelpAction | ComEnhanceAction
+export type ConfirmActions = ConfirmAction | ClearConfirmAction | OkayAction | CancelAction
+export type CommandActionTypes = ProcessCommandAction | ReceiveCommandAction | InvalidCommandAction | ClearCommandsAction | ReadyAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComZoomInAction | ComZoomOutAction | ComStopAction | ComHelpAction | ComEnhanceAction

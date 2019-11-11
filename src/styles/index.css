@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
 }
 
 code {
@@ -34,7 +35,7 @@ code {
 }
 
 .led {
-  font-size: 1.3em;
+  font-size: 1em;
 }
 
 .led.led-sleep {
@@ -47,6 +48,43 @@ code {
 
 .led.led-danger {
   color: rgb(214, 46, 46);
+}
+
+.prompt {
+  display: block;
+  background: #717681;
+  color: beige;
+  border: solid 1px #fff;
+}
+
+.console {
+  position: relative;
+  display: block;
+  border-radius: 5px;
+  border: solid 1px #717681;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.console ul {
+  list-style: none;
+  padding: 0 10px;
+  height: 60vh;
+  overflow-y: auto;
+  border-left: solid 1px #366141;
+  margin-left: 14px;
+}
+
+.console ul > li {
+  font-size: 0.7em;
+  text-align: left;
+  color: #1b9a3c;
+}
+
+.console .led {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .d-flex {
@@ -75,4 +113,72 @@ code {
 
 .ml-1 {
   margin-left: 0.3rem!important;
+}
+
+.mt-1 {
+  margin-top: 0.3rem!important;
+}
+
+.mt-2 {
+  margin-top: 0.5rem!important;
+}
+
+.mb-1 {
+  margin-bottom: 0.3rem!important;
+}
+
+.m-center {
+  margin: 0 auto;
+}
+
+.vw-75 {
+  width: 70vw;
+}
+
+.w-75 {
+  width: 70%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.bb {
+  border-bottom: solid 1px #4d4f53;
+}
+
+.p-0 {
+  padding: 0!important;
+}
+
+.pb-1 {
+  padding-bottom: 8px;
+}
+
+.pt-1 {
+  padding-bottom: 8px;
+}
+
+.pb-2 {
+  padding-bottom: 12px;
+}
+
+.pt-2 {
+  padding-bottom: 12px;
+}
+
+.p-1 {
+  padding: 6px 8px;
+}
+
+.p-2 {
+  padding: 12px 16px;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.collapse {
+  display: none;
 }

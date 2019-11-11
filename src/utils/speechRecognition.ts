@@ -10,8 +10,12 @@ import {
   COM_ENHANCE,
   COM_CENTER,
   COM_ZOOM_IN,
-  COM_ZOOM_OUT
+  COM_ZOOM_OUT,
+  CONFIRM,
+  CANCEL,
+  OKAY
 } from "../actions/commands";
+import { TOGGLE_POWER } from "../types/action";
 
 export interface command {
   command: string
@@ -28,7 +32,10 @@ const vocab: command[] = [
   { command: 'stop', keywords: ['stop', 'wait', 'hold', 'ho', 'hoe', 'holdon'], action: COM_STOP },
   { command: 'help', keywords: ['help'], action: COM_HELP },
   { command: 'enhance', keywords: ['enhance', 'hands', 'hand', 'han', 'hun'], action: COM_ENHANCE },
-  { command: 'center', keywords: ['center'], action: COM_CENTER }
+  { command: 'center', keywords: ['center'], action: COM_CENTER },
+  { command: 'shutdown', keywords: ['shutdown', 'exit'], action: TOGGLE_POWER },
+  { command: 'okay', keywords: ['okay', 'yes'], action: OKAY },
+  { command: 'cancel', keywords: ['cancel', 'no'], action: CANCEL }
 ]
 
 window.SpeechRecognition = (window as any).webkitSpeechRecognition || window.SpeechRecognition;
@@ -45,9 +52,6 @@ if ('SpeechRecognition' in window) {
 
     recognition.onresult = function(event) { 
       store.dispatch(processCommand(event.results[event.resultIndex]))
-
-      console.group('RECOGNITION')
-      console.log(event) 
     }
 
 } else {

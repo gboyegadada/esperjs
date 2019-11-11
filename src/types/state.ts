@@ -1,4 +1,5 @@
 import rootReducer from "../reducers";
+import { AnyAction } from "redux";
 
 export interface PowerState {
     on: boolean
@@ -7,6 +8,18 @@ export interface PowerState {
 export interface CommandState {
     command: string
     timestamp: number
+}
+
+export interface ConfirmState {
+    message: string
+    action: AnyAction
+    status: ConfirmStatus
+}
+
+export enum ConfirmStatus {
+    Okay,
+    Cancel,
+    Pending
 }
 
 export enum ReceivedState {

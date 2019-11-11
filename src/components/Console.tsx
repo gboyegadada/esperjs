@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { CommandState } from '../types/state';
+import { CommandState, PowerState } from '../types/state';
 import { connect } from 'react-redux';
+import Indicator from './Indicator';
 
 interface Props {
     commands: CommandState[]
+    power: PowerState
 }
 
-export function Console ({ commands }: Props) {
+export function Console ({ commands, power }: Props) {
     return (
-        <div>
-          <code>
-            <ul>
+        <div className='console w-100 pt-2 pb-1 mt-2'>
+            <Indicator successClassName='led led-success' dangerClassName='led led-danger'/>
+            <ul className={`d-flex flex-col justify-content-start ${power.on ? '' : 'hide' }`}>
               {commands.map((com, k) => (
                 <li key={k}>{com.command}</li>
               ))}
             </ul>
-          </code>
         </div>
         )
 }
 
-export default connect(({ commands }: { commands: CommandState[] }) => ({ commands }))(Console)
+export default connect(({ commands, power }: { commands: CommandState[], power: PowerState }) => ({ commands, power }))(Console)
