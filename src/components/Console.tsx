@@ -12,7 +12,7 @@ export function Console ({ commands, power }: Props) {
     return (
         <div className='console w-100 pt-2 pb-1 mt-2'>
             <Indicator successClassName='led led-success' dangerClassName='led led-danger'/>
-            <ul className={`d-flex flex-col justify-content-start ${power.on ? '' : 'hide' }`}>
+            <ul className={`d-flex flex-col justify-content-start code ${power.on ? '' : 'hide' }`}>
               <li>Say "shut down" and then say "okay" to confirm or "cancel" to abort...</li>
               {commands.map((com, k) => (
                 <li key={k}>{com.command}</li>
