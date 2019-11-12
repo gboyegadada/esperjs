@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "ESPER Machine",
+  "name": "Simulation of the ESPER Machine from Blade Runner (1982) using HTML5 speech recognition.",
   "icons": [
     {
       "src": "favicon.ico",

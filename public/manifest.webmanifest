@@ -1,0 +1,23 @@
+{
+    "name": "ESPER Machine",
+    "description": "Simulation of the ESPER Machine from Blade Runner (1982) using HTML5 speech recognition.",
+    "type": "privileged",
+    "launch_path": "/index.html",
+    "icons": {
+      "512": "/img/ws512.png",
+      "128": "/img/ws128.png"
+    },
+    "developer": {
+      "name": "Gboyega Dada",
+      "url": "https://github.com/gboyegadada/esperjs"
+    },
+    "default_locale": "en",
+    "permissions": {
+      "audio-capture" : {
+        "description" : "Audio capture"
+      },
+      "speech-recognition" : {
+        "description" : "Speech recognition"
+      }
+    }
+  }

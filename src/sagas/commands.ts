@@ -3,8 +3,8 @@ import { ProcessCommandAction, OkayAction, CancelAction, TogglePowerAction, TOGG
 import { lookup } from '../utils/speechRecognition';
 import { receiveCommand, ready, invalidCommand, OKAY, clearConfirm, CANCEL, confirm, okay, PROCESS_COMMAND, clearCommands } from '../actions/commands';
 import { store } from '..';
-import { ConfirmStatus, ConfirmState } from '../types/state';
-import SpeechRecognition from '../utils/speechRecognition'
+import { ConfirmState } from '../types/state';
+import speechRecognition from '../utils/speechRecognition'
 import beep, { errorBeep } from '../utils/audioEfx';
 
 // worker Saga: will be fired on PROCESS_COMMAND actions
@@ -32,21 +32,25 @@ function* processCommandAction(action: ProcessCommandAction) {
         errorBeep()
     }
 
-    yield delay(700)
+    yield delay(900)
     yield put(ready())
 }
 
 function* shudownAction(action: TogglePowerAction) {
     const { power } = store.getState()
     
-    if (null === SpeechRecognition) return
+    if (null === speechRecognition) return
     
-    power.on 
-        // ESPER is **ON** so start listening...
-        ? SpeechRecognition.start()
-        
-        // ESPER is **OFF** so stop listening...
-        : SpeechRecognition.stop()
+    try {
+        power.on 
+            // ESPER is **ON** so start listening...
+            ? speechRecognition.start()
+            
+            // ESPER is **OFF** so stop listening...
+            : speechRecognition.stop()
+    } catch (e) {
+        console.debug('ERROR: It looks like speech recognition not supported here yet 😶.', e.message, speechRecognition)
+    }
 }
 
 function* okayAction(action: OkayAction) {

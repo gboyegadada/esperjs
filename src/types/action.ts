@@ -40,7 +40,7 @@ export interface ReceiveCommandAction {
 
 export interface InvalidCommandAction {
     type: typeof INVALID_COMMAND
-    result: SpeechRecognitionResult
+    result: SpeechRecognitionResult | null
 }
 
 export interface ClearCommandsAction {

@@ -1,6 +1,6 @@
 const a = new AudioContext() // browsers limit the number of concurrent audio contexts, so you better re-use'em
 
-export default function beep(vol: number = 35, freq: number = 700, duration: number = 300){
+export default function beep(vol: number = 40, freq: number = 700, duration: number = 300){
   const v = a.createOscillator()
   const u = a.createGain()
   
