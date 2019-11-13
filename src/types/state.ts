@@ -28,6 +28,32 @@ export enum ReceivedState {
     Success
 }
 
+export interface LocationState {
+    x: number
+    y: number
+    moving: MovingState
+    intervalID: NodeJS.Timeout | null
+}
+
+export enum MovingState {
+    Left,
+    Right,
+    Up,
+    Down,
+    Stop
+}
+
+export interface ZoomState {
+    scale: number
+    zooming: ZoomingState
+}
+
+export enum ZoomingState {
+    In,
+    Out,
+    Stop
+}
+
 /**
  * Will return something like:
  * {
