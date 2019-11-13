@@ -7,23 +7,15 @@ import beep, { errorBeep } from '../utils/audioEfx';
 
 // worker Saga: will be fired on PROCESS_COMMAND actions
 function* processCommandAction(action: ProcessCommandAction) {
-    const { commands } = store.getState()
-
-    let lastCommand: string = ''
-    let ago: number = 10000;
-    if (undefined !== commands[commands.length-1]) {
-        lastCommand = commands[commands.length-1].command
-        ago = (new Date().getTime()) - commands[commands.length-1].timestamp
-    }
 
     const command = lookup(action.result)
-    if (command && (lastCommand !== command.command && ago > 600)) {
+    if (command) {
         yield put(receiveCommand(command))
         yield put({ type: command.action })
 
         beep()
     } else if (command && undefined !== command) {
-        console.log('SKIP_COMMAND', command, ago)
+        console.log('SKIP_COMMAND', command)
     } else {
         yield put(invalidCommand(action.result))
         
