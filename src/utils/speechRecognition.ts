@@ -60,7 +60,7 @@ let running = false
 let stopped = true
 let away = false
 
-if ('SpeechRecognition' in window) {
+if ('SpeechRecognition' in window && window.SpeechRecognition) {
     // speech recognition API supported
     recognition = new window.SpeechRecognition();
 
