@@ -1,7 +1,6 @@
 import { ConfirmActions } from '../types/action'
 import { CONFIRM, OKAY, CANCEL, CLEAR_CONFIRM } from '../actions/commands'
-import { ReceivedState, ConfirmState, ConfirmStatus } from '../types/state'
-import { AnyAction } from 'redux'
+import { ConfirmState, ConfirmStatus } from '../types/state'
 
 const initialState: ConfirmState | null = null
 

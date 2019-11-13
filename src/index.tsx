@@ -8,7 +8,7 @@ import App from './components/App';
 
 import reducer from './reducers'
 import middleware, { sagaMiddleware } from './middleware'
-import rootSaga from './sagas/commands';
+import rootSaga from './sagas';
 
 export const store = createStore(reducer, middleware)
 

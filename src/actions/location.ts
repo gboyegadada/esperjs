@@ -1,0 +1,5 @@
+export const COM_MOVE_LEFT = 'COM_MOVE_LEFT'
+export const COM_MOVE_RIGHT = 'COM_MOVE_RIGHT'
+export const COM_MOVE_UP = 'COM_MOVE_UP'
+export const COM_MOVE_DOWN = 'COM_MOVE_DOWN'
+export const COM_CENTER = 'COM_CENTER'

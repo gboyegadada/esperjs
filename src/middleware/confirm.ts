@@ -1,15 +1,15 @@
 import { AnyAction, Middleware, Dispatch, MiddlewareAPI } from "redux"
 import { TOGGLE_POWER } from "../types/action"
 import { ConfirmStatus } from "../types/state"
-import { confirm } from "../actions/commands"
+import { confirm as confirmAction } from "../actions/commands"
 
-const confirmChecker: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (action: AnyAction) => {
+const confirm: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (action: AnyAction) => {
     const { confirm: confirmState, power } = store.getState()
 
     if (action.type === TOGGLE_POWER && false === power.on) return next(action) 
 
     if (action.type === TOGGLE_POWER && confirmState === null)  {
-        store.dispatch(confirm({
+        store.dispatch(confirmAction({
             message: 'ESPER will shutdown. Confirm?',
             action,
             status: ConfirmStatus.Pending
@@ -24,4 +24,4 @@ const confirmChecker: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (
     return next(action) 
 }
 
-export default confirmChecker
+export default confirm
