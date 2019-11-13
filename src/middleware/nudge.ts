@@ -4,7 +4,7 @@ import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN, COM_NUDGE_LE
 
 const INTERVAL_MS = 500
 
-// Automatically stop nudges before a MOVE or ZOOM action
+// Automatically stop nudges before a new COM_MOVE_* or COM_ZOOM_* action gets to the reducer.
 const nudge: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (action: AnyAction) => {
 
     if (/^(COM_MOVE_|COM_ZOOM_)/.test(action.type)) {
@@ -38,6 +38,14 @@ const nudge: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (action: A
             
             store.dispatch(intervalAction)
         }
+    }
+    
+    // Stop PANNING / ZOOMING after a few nudges...
+    if (/^(COM_NUDGE_)/.test(action.type)) {
+
+        const { nudge: { count } } = store.getState()
+
+        count >= 6 && store.dispatch(stop())
     }
     
     return next(action) 

@@ -32,7 +32,6 @@ export interface LocationState {
     x: number
     y: number
     moving: MovingState
-    intervalID: NodeJS.Timeout | null
 }
 
 export enum MovingState {
@@ -52,6 +51,11 @@ export enum ZoomingState {
     In,
     Out,
     Stop
+}
+
+export interface NudgeState {
+    count: number
+    interval: NodeJS.Timeout | null
 }
 
 /**

@@ -58,6 +58,7 @@ let lastStartedAt = 0
 let interimTimeoutHandle: NodeJS.Timeout | null = null
 let running = false
 let stopped = true
+let away = false
 
 if ('SpeechRecognition' in window) {
     // speech recognition API supported
@@ -82,17 +83,31 @@ if ('SpeechRecognition' in window) {
     }
 
     recognition.onstart = function() { 
-      console.log('Start listening...')
+      console.log('Listening...')
       running = true
     }
 
     recognition.onend = function() { 
       running = false
-      if (interimTimeoutHandle || stopped) return
+      if (interimTimeoutHandle || stopped || away) return
 
       console.log('Restart listening...')
       startListen()
     }
+
+    window.addEventListener('blur', () => {
+      away = true
+      console.log('Sleep...')
+
+      if (initialized && recognition && running) recognition.stop()
+    })
+
+    window.addEventListener('focus', () => {
+      away = false
+      console.log('Wake...')
+
+      if (initialized && recognition && !stopped) startListen()
+    })
 
     // recognition.onerror = function(event) {
     //   console.log('Speech recognition error detected: ' + event.error);

@@ -1,13 +1,11 @@
 import { LocationActionTypes } from '../types/action'
-import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN, COM_NUDGE_LEFT, COM_NUDGE_RIGHT, COM_NUDGE_UP, COM_NUDGE_DOWN, COM_CENTER, SET_MOVE_INTERVAL } from '../actions/location'
-import { COM_STOP } from '../actions/commands'
+import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN, COM_NUDGE_LEFT, COM_NUDGE_RIGHT, COM_NUDGE_UP, COM_NUDGE_DOWN, COM_CENTER } from '../actions/location'
 import { LocationState, MovingState } from '../types/state'
 
 const initialState: LocationState = {
     x: 0,
     y: 0,
     moving: MovingState.Stop,
-    intervalID: null,
 }
 
 export default function location (state = initialState, action: LocationActionTypes) {
@@ -35,16 +33,6 @@ export default function location (state = initialState, action: LocationActionTy
         // Center
         case COM_CENTER:
             return { ...state, x: 0, y: 0  }
-
-        // Set nudge interval (for action that will be dispatched)
-        case SET_MOVE_INTERVAL:
-                return { ...state, intervalID: action.interval }
-
-        // Stop moving
-        case COM_STOP:
-            if (state.intervalID) clearInterval(state.intervalID)
-
-            return { ...state, moving: MovingState.Stop, intervalID: null }
 
         default:
             return state
