@@ -1,6 +1,7 @@
 import { AnyAction, Middleware, Dispatch, MiddlewareAPI } from "redux"
 import { stop } from "../actions/commands"
-import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN, COM_NUDGE_LEFT, COM_NUDGE_RIGHT, COM_NUDGE_UP, COM_NUDGE_DOWN, setMoveInterval } from "../actions/location"
+import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN } from "../actions/location"
+import { COM_NUDGE_LEFT, COM_NUDGE_RIGHT, COM_NUDGE_UP, COM_NUDGE_DOWN, setNudgeInterval } from "../actions/nudge"
 
 const INTERVAL_MS = 500
 
@@ -32,7 +33,7 @@ const nudge: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (action: A
         }
         
         if (NUDGE_ACTION_TYPE) {
-            const intervalAction = setMoveInterval(setInterval(() => {
+            const intervalAction = setNudgeInterval(setInterval(() => {
                 store.dispatch({ type: NUDGE_ACTION_TYPE })
             }, INTERVAL_MS))
             

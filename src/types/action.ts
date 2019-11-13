@@ -19,20 +19,23 @@ import {
     COM_MOVE_UP, 
     COM_MOVE_DOWN, 
     COM_CENTER,
-    COM_NUDGE_LEFT,
-    COM_NUDGE_RIGHT,
-    COM_NUDGE_UP,
-    COM_NUDGE_DOWN,
-    SET_MOVE_INTERVAL
 } from "../actions/location"
 
 import { 
     COM_ZOOM_IN, 
     COM_ZOOM_OUT, 
-    COM_NUDGE_IN,
-    COM_NUDGE_OUT,
     SET_ZOOM_INTERVAL,
 } from "../actions/zoom"
+
+import {
+    COM_NUDGE_LEFT,
+    COM_NUDGE_RIGHT,
+    COM_NUDGE_UP,
+    COM_NUDGE_DOWN,
+    SET_NUDGE_INTERVAL,
+    COM_NUDGE_IN,
+    COM_NUDGE_OUT,
+} from "../actions/nudge"
 
 import { CommandState, ConfirmState } from "./state"
 
@@ -119,8 +122,8 @@ export interface ComCenterAction {
     type: typeof COM_CENTER
 }
 
-export interface SetMoveIntervalAction {
-    type: typeof SET_MOVE_INTERVAL
+export interface SetNudgeIntervalAction {
+    type: typeof SET_NUDGE_INTERVAL
     interval: NodeJS.Timeout | null
 }
 
@@ -160,5 +163,5 @@ export interface ComEnhanceAction {
 export type PowerActionTypes = TogglePowerAction
 export type ConfirmActions = ConfirmAction | ClearConfirmAction | OkayAction | CancelAction
 export type CommandActionTypes = ProcessCommandAction | ReceiveCommandAction | InvalidCommandAction | ClearCommandsAction | ReadyAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComZoomInAction | ComZoomOutAction | ComStopAction | ComHelpAction | ComEnhanceAction
-export type LocationActionTypes = SetMoveIntervalAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComNudgeLeftAction | ComNudgeRightAction | ComNudgeUpAction | ComNudgeDownAction | ComCenterAction | ComStopAction
-export type ZoomActionTypes = SetZoomIntervalAction | ComZoomInAction | ComZoomOutAction | ComNudgeInAction | ComNudgeOutAction | ComEnhanceAction | ComStopAction
+export type LocationActionTypes = SetNudgeIntervalAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComNudgeLeftAction | ComNudgeRightAction | ComNudgeUpAction | ComNudgeDownAction | ComCenterAction | ComStopAction
+export type ZoomActionTypes = SetNudgeIntervalAction | SetZoomIntervalAction | ComZoomInAction | ComZoomOutAction | ComNudgeInAction | ComNudgeOutAction | ComEnhanceAction | ComStopAction

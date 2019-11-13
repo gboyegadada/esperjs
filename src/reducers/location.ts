@@ -1,5 +1,6 @@
 import { LocationActionTypes } from '../types/action'
-import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN, COM_NUDGE_LEFT, COM_NUDGE_RIGHT, COM_NUDGE_UP, COM_NUDGE_DOWN, COM_CENTER } from '../actions/location'
+import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN, COM_CENTER } from '../actions/location'
+import { COM_NUDGE_LEFT, COM_NUDGE_RIGHT, COM_NUDGE_UP, COM_NUDGE_DOWN } from '../actions/nudge'
 import { LocationState, MovingState } from '../types/state'
 
 const initialState: LocationState = {
