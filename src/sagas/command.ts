@@ -1,10 +1,8 @@
 import { put, takeLatest, delay } from 'redux-saga/effects'
-import { ProcessCommandAction, OkayAction, CancelAction, TogglePowerAction, TOGGLE_POWER } from '../types/action';
-import { lookup } from '../utils/speechRecognition';
-import { receiveCommand, ready, invalidCommand, OKAY, clearConfirm, CANCEL, confirm, okay, PROCESS_COMMAND, clearCommands } from '../actions/commands';
+import { ProcessCommandAction, TogglePowerAction, TOGGLE_POWER } from '../types/action';
+import { lookup, startListen, stopListen } from '../utils/speechRecognition';
+import { receiveCommand, ready, invalidCommand, PROCESS_COMMAND } from '../actions/commands';
 import { store } from '..';
-import { ConfirmState } from '../types/state';
-import speechRecognition from '../utils/speechRecognition'
 import beep, { errorBeep } from '../utils/audioEfx';
 
 // worker Saga: will be fired on PROCESS_COMMAND actions
@@ -39,37 +37,23 @@ function* processCommandAction(action: ProcessCommandAction) {
 function* shudownAction(action: TogglePowerAction) {
     const { power } = store.getState()
     
-    if (null === speechRecognition) return
-    
     try {
         power.on 
             // ESPER is **ON** so start listening...
-            ? speechRecognition.start()
+            ? startListen()
             
             // ESPER is **OFF** so stop listening...
-            : speechRecognition.stop()
+            : stopListen()
+
+        yield true
     } catch (e) {
-        console.debug('ERROR: It looks like speech recognition not supported here yet 😶.', e.message, speechRecognition)
+        console.debug('ERROR: It looks like speech recognition not supported here yet 😶.', e.message)
     }
-}
-
-function* okayAction(action: OkayAction) {
-    const confirmState: ConfirmState|null = store.getState().confirm
-    if (null === confirmState) return
-
-    yield put(confirmState.action)
-    yield put(clearConfirm())
-}
-
-function* cancelAction(action: OkayAction|CancelAction) {
-    yield put(clearConfirm())
 }
 
 function* rootSaga() {
     yield takeLatest(PROCESS_COMMAND, processCommandAction)
     yield takeLatest(TOGGLE_POWER, shudownAction)
-    yield takeLatest(OKAY, okayAction)
-    yield takeLatest(CANCEL, cancelAction)
 }
 
 export default rootSaga
