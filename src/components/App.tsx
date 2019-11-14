@@ -14,7 +14,7 @@ interface Props {
   dispatch: Dispatch
 }
 
-class App extends Component<Props> {
+export class App extends Component<Props> {
 
   togglePower = (power: PowerState) => {
         this.props.dispatch(togglePower())
