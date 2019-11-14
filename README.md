@@ -1,4 +1,7 @@
+[![Build Status](https://travis-ci.com/gboyegadada/esperjs.svg?branch=master)](https://travis-ci.com/gboyegadada/esperjs)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/15bc43e0-0dd7-4a4e-bdae-e230f85fe060/deploy-status)](https://app.netlify.com/sites/esperjs/deploys)
+
+
 
 ### Esper JS
 Fun simulation of the ESPER Machine from the photo analysis scene in Blade Runner (1982) using HTML5 speech recognition.
@@ -7,7 +10,7 @@ Fun simulation of the ESPER Machine from the photo analysis scene in Blade Runne
 
 This only works in Chrome on Windows 10 as of November 12, 2019.
 
-![Web Speech API Browser Support](./0_2_G9MO8N-aVX0TAj.png)
+![Web Speech API Browser Support](./public/speech-recognition-support.png)
 
 ### Reference
 
