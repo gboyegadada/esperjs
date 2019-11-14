@@ -1,5 +1,5 @@
-import { LocationActionTypes } from '../types/action'
-import { COM_NUDGE_LEFT, COM_NUDGE_RIGHT, COM_NUDGE_UP, COM_NUDGE_DOWN, SET_NUDGE_INTERVAL } from '../actions/nudge'
+import { LocationActionTypes, ZoomActionTypes } from '../types/action'
+import { COM_NUDGE_LEFT, COM_NUDGE_RIGHT, COM_NUDGE_UP, COM_NUDGE_DOWN, SET_NUDGE_INTERVAL, COM_NUDGE_IN, COM_NUDGE_OUT } from '../actions/nudge'
 import { COM_STOP } from '../actions/commands'
 import { NudgeState } from '../types/state'
 
@@ -8,13 +8,15 @@ const initialState: NudgeState = {
     interval: null,
 }
 
-export default function nudge (state = initialState, action: LocationActionTypes) {
+export default function nudge (state = initialState, action: LocationActionTypes | ZoomActionTypes) {
     switch(action.type) {
         // Nudge: left | right | up | down
         case COM_NUDGE_LEFT:
         case COM_NUDGE_RIGHT:
         case COM_NUDGE_UP:
         case COM_NUDGE_DOWN:
+        case COM_NUDGE_IN:
+        case COM_NUDGE_OUT:
                 return  { ...state, count: state.count + 1  }
 
         // Set nudge interval (for action that will be dispatched)

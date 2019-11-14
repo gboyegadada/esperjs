@@ -1,0 +1,6 @@
+if: branch = master
+language: node_js
+node_js:
+  - 'stable'
+script:
+  - npm run test:coverage

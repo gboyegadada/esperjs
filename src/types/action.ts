@@ -38,6 +38,7 @@ import {
 } from "../actions/nudge"
 
 import { CommandState, ConfirmState } from "./state"
+import { COM_UPLOADER_BROWSE, COM_UPLOADER_CAPTURE, COM_UPLOADER_READY, COM_UPLOADER_CLEAR } from "../actions/uploader"
 
 export const TOGGLE_POWER = 'TOGGLE_POWER'
 
@@ -160,6 +161,23 @@ export interface ComEnhanceAction {
     type: typeof COM_ENHANCE
 }
 
+export interface ComUploaderBrowseAction {
+    type: typeof COM_UPLOADER_BROWSE
+}
+
+export interface ComUploaderCaptureAction {
+    type: typeof COM_UPLOADER_CAPTURE
+    file: String
+}
+
+export interface ComUploaderReadyAction {
+    type: typeof COM_UPLOADER_READY
+}
+
+export interface ComUploaderClearAction {
+    type: typeof COM_UPLOADER_CLEAR
+}
+
 export type NudgeType = typeof COM_NUDGE_LEFT | typeof COM_NUDGE_RIGHT | typeof COM_NUDGE_UP | typeof COM_NUDGE_DOWN | typeof COM_NUDGE_IN |  typeof COM_NUDGE_OUT
 
 export type PowerActionTypes = TogglePowerAction
@@ -167,3 +185,4 @@ export type ConfirmActions = ConfirmAction | ClearConfirmAction | OkayAction | C
 export type CommandActionTypes = ProcessCommandAction | ReceiveCommandAction | InvalidCommandAction | ClearCommandsAction | ReadyAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComZoomInAction | ComZoomOutAction | ComStopAction | ComHelpAction | ComEnhanceAction
 export type LocationActionTypes = SetNudgeIntervalAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComNudgeLeftAction | ComNudgeRightAction | ComNudgeUpAction | ComNudgeDownAction | ComCenterAction | ComStopAction
 export type ZoomActionTypes = SetNudgeIntervalAction | SetZoomIntervalAction | ComZoomInAction | ComZoomOutAction | ComNudgeInAction | ComNudgeOutAction | ComEnhanceAction | ComStopAction
+export type UploaderActionTypes = ComUploaderBrowseAction | ComUploaderCaptureAction | ComUploaderClearAction | ComUploaderReadyAction

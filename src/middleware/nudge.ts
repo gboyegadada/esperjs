@@ -54,7 +54,7 @@ const nudge: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (action: A
 
     const { nudge: { count } } = store.getState()
 
-    if(count >= 6) return next(stop())
+    if(count >= 10) return next(stop())
   }
   
   return next(action) 

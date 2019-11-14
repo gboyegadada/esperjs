@@ -35,7 +35,8 @@ code, .code {
 }
 
 .led {
-  font-size: 1em;
+  font-size: 0.8em;
+  box-shadow: 0px 0px 2px #3e4450;
 }
 
 .led.led-sleep {
@@ -62,14 +63,13 @@ code, .code {
   display: block;
   border-radius: 5px;
   border: solid 1px #717681;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .console ul {
   list-style: none;
   padding: 0 10px;
-  height: 60vh;
+  height: 20vh;
   overflow-y: auto;
   border-left: solid 1px #366141;
   margin-left: 14px;
@@ -85,6 +85,25 @@ code, .code {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.monitor {
+  position: relative;
+  display: block;
+  height: 60vh;
+  width: 100%;
+  border-radius: 10px;
+  border: solid 2px #717681;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  overflow: hidden;
+}
+
+.monitor .frame, 
+.monitor .frame .slide {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .d-flex {
@@ -127,6 +146,18 @@ code, .code {
   margin-bottom: 0.3rem!important;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem!important;
+}
+
+.mb-3 {
+  margin-bottom: 0.7rem!important;
+}
+
+.mb-4 {
+  margin-bottom: 1rem!important;
+}
+
 .m-center {
   margin: 0 auto;
 }
@@ -156,7 +187,7 @@ code, .code {
 }
 
 .pt-1 {
-  padding-bottom: 8px;
+  padding-top: 8px;
 }
 
 .pb-2 {
@@ -164,7 +195,11 @@ code, .code {
 }
 
 .pt-2 {
-  padding-bottom: 12px;
+  padding-top: 12px;
+}
+
+.pt-4 {
+  padding-top: 24px;
 }
 
 .p-1 {

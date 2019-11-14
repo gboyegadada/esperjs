@@ -8,13 +8,14 @@ import { Dispatch } from 'redux';
 import { togglePower } from '../actions/power';
 import Console from './Console';
 import Prompt from './Prompt';
+import Monitor from './Monitor';
 
 interface Props {
   power: PowerState
   dispatch: Dispatch
 }
 
-class App extends Component<Props> {
+export class App extends Component<Props> {
 
   togglePower = (power: PowerState) => {
         this.props.dispatch(togglePower())
@@ -25,7 +26,7 @@ class App extends Component<Props> {
 
       return (
         <div className="App vw-75 m-center">
-          <header className="App-header">
+          <header className="App-header mb-4 pt-4">
             
             <div className='d-flex flex-row justify-content-between w-100 bb pb-1'>
               <div className={`d-flex flex-row justify-content-start btn btn-power ${power.on && 'on'}`} onClick={() => this.togglePower(power)}>
@@ -34,6 +35,7 @@ class App extends Component<Props> {
               </div>
             </div>
             <Prompt />
+            <Monitor />
             <Console />
           </header>
         </div>
