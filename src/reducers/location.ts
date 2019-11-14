@@ -26,13 +26,13 @@ export default function location (state = initialState, action: LocationActionTy
 
     // Nudge: left | right | up | down
     case COM_NUDGE_LEFT:
-      return m === MovingState.Stop ? state : state.x === -100 ? state : { ...state, x: state.x - 1  }
+      return m === MovingState.Stop ? state : state.x === -100 ? state : { ...state, x: state.x - 2  }
     case COM_NUDGE_RIGHT:
-      return m === MovingState.Stop ? state : state.x === 100 ? state : { ...state, x: state.x + 1  }
+      return m === MovingState.Stop ? state : state.x === 100 ? state : { ...state, x: state.x + 2  }
     case COM_NUDGE_UP:
-      return m === MovingState.Stop ? state : state.y === -100 ? state : { ...state, y: state.y - 1  }
+      return m === MovingState.Stop ? state : state.y === -100 ? state : { ...state, y: state.y - 2  }
     case COM_NUDGE_DOWN:
-      return m === MovingState.Stop ? state : state.y === 100 ? state : { ...state, y: state.y + 1  }
+      return m === MovingState.Stop ? state : state.y === 100 ? state : { ...state, y: state.y + 2  }
 
     // Center
     case COM_CENTER:
