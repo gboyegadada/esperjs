@@ -160,6 +160,8 @@ export interface ComEnhanceAction {
     type: typeof COM_ENHANCE
 }
 
+export type NudgeType = typeof COM_NUDGE_LEFT | typeof COM_NUDGE_RIGHT | typeof COM_NUDGE_UP | typeof COM_NUDGE_DOWN | typeof COM_NUDGE_IN |  typeof COM_NUDGE_OUT
+
 export type PowerActionTypes = TogglePowerAction
 export type ConfirmActions = ConfirmAction | ClearConfirmAction | OkayAction | CancelAction
 export type CommandActionTypes = ProcessCommandAction | ReceiveCommandAction | InvalidCommandAction | ClearCommandsAction | ReadyAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComZoomInAction | ComZoomOutAction | ComStopAction | ComHelpAction | ComEnhanceAction
