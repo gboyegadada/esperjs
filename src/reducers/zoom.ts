@@ -4,11 +4,12 @@ import { ZoomState, ZoomingState } from '../types/state'
 import { COM_STOP } from '../actions/commands'
 import { COM_ZOOM_IN, COM_ZOOM_OUT } from '../actions/zoom'
 
-const STEP = 1.2
-export const MAX_ZOOM = 20
+const STEP = 2
+export const MAX_ZOOM = 200
+export const MIN_ZOOM = 1
 
 const initialState: ZoomState = {
-  scale: 1,
+  scale: 100,
   zooming: ZoomingState.Stop,
 }
 
@@ -29,9 +30,9 @@ export default function location (state = initialState, action: ZoomActionTypes)
 
     // Nudge: in | out
     case COM_NUDGE_IN:
-      return z === ZoomingState.Stop ? state : s >= MAX_ZOOM ? state : { ...state, scale: r(s * STEP)  }
+      return z === ZoomingState.Stop ? state : s === MAX_ZOOM ? state : { ...state, scale: r(s + STEP)  }
     case COM_NUDGE_OUT:
-      return z === ZoomingState.Stop ? state : s <= 1/MAX_ZOOM ? state : { ...state, scale: r(s / STEP)  }
+      return z === ZoomingState.Stop ? state : s <= MIN_ZOOM ? state : { ...state, scale: r(s - STEP)  }
 
     // Stop zooming
     case COM_STOP:
@@ -41,9 +42,9 @@ export default function location (state = initialState, action: ZoomActionTypes)
 
         // If we were previously zooming IN, nudge 1 step OUT to compensate 
         // for delay after saying "stop". Same for the other way around.
-        scale: (z === ZoomingState.In && s > 1/MAX_ZOOM)
-          ? s / STEP 
-          : (z === ZoomingState.Out && s < MAX_ZOOM) ? r(s * STEP) : s + 0,
+        // scale: (z === ZoomingState.In && s > MIN_ZOOM)
+        //   ? s - STEP 
+        //   : (z === ZoomingState.Out && s < MAX_ZOOM) ? r(s + STEP) : s + 0,
       }
 
     default:

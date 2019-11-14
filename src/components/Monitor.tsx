@@ -1,9 +1,10 @@
-import React, { useRef, useEffect, useState, ChangeEvent } from 'react';
-import { CommandState, PowerState, LocationState, ZoomState } from '../types/state';
-import { connect } from 'react-redux';
-import { MAX_ZOOM } from '../reducers/zoom';
+import React, { useRef, useEffect, ChangeEvent } from 'react';
+import { PowerState, LocationState, ZoomState, UploaderState, UploaderStatus } from '../types/state';
+import { connect, useDispatch } from 'react-redux';
+import { capture } from '../actions/uploader';
 
 interface Props {
+  uploader: UploaderState
   power: PowerState
   location: LocationState
   zoom: ZoomState
@@ -13,17 +14,18 @@ interface HTMLInputEvent extends ChangeEvent {
   target: HTMLInputElement & EventTarget;
 }
 
-export function Monitor ({ power: { on }, location: l, zoom: z }: Props) {
-  const [state, setState] = useState({
-    file: null
-  })
+export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Props) {
 
-  const frameRef = useRef(null);
-  const slideRef = useRef(null);
+  const dispatch = useDispatch()
 
+  const frameRef = useRef(null)
+  const slideRef = useRef(null)
+  const uploaderRef = useRef(null)
+
+  const scale = z.scale / 100 // 120% eq 1.2x ... 150% eq 1.5x ... 70% eq 0.7x ... e.t.c
   const ratio = 1.6
 
-  const width = Math.round(1920 * z.scale)
+  const width = Math.round(1920 * scale)
   const height = Math.round(width / ratio)
   
   const frameWidth = 894;
@@ -35,20 +37,16 @@ export function Monitor ({ power: { on }, location: l, zoom: z }: Props) {
   const slideStyle = {
     backgroundSize: `${width}px ${height}px`, // width, height
     backgroundPosition: `${left}px ${top}px`, // top, left
-    backgroundImage: `url(${state.file})`,
+    backgroundImage: `url(${uploader.file})`,
     backgroundRepeat: 'no-repeat', 
   }
   
-
   useEffect(() => {
-    const w = frameRef.current ? frameRef.current.offsetWidth : 0;
-    console.log('Frame width:', w);
-  }, [frameRef.current]);
+    if (uploader.status === UploaderStatus.Browse) uploaderRef.current.click()
+  }, [uploader.status, uploaderRef.current])
 
   const handleUpload = (e: HTMLInputEvent) => {
-    setState({
-      file: URL.createObjectURL(e.target.files[0])
-    })
+    dispatch(capture(URL.createObjectURL(e.target.files[0])))
   } 
 
   return (
@@ -56,10 +54,9 @@ export function Monitor ({ power: { on }, location: l, zoom: z }: Props) {
       <div className='frame' ref={frameRef}>
         <div className={`slide${on ? '' : ' hide'}`} style={slideStyle} ref={slideRef}>&nbsp;</div>
       </div>
-      <input type="file" className='' style={{position: "absolute", top: "20px"}} onChange={handleUpload}/>
-      
+      <input type="file" className='hide' accept="image/*" style={{position: "absolute", top: "20px"}} ref={uploaderRef} onChange={handleUpload}/>
     </div>
     )
 }
 
-export default connect(({ location, zoom, power }: { location: LocationState, zoom: ZoomState, power: PowerState }) => ({ location, zoom, power }))(Monitor)
+export default connect(({ location, zoom, uploader, power }: { uploader: UploaderState, location: LocationState, zoom: ZoomState, power: PowerState }) => ({ uploader, location, zoom, power }))(Monitor)

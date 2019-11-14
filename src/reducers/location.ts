@@ -26,13 +26,13 @@ export default function location (state = initialState, action: LocationActionTy
 
     // Nudge: left | right | up | down
     case COM_NUDGE_LEFT:
-      return m === MovingState.Stop ? state : state.x === -100 ? state : { ...state, x: state.x - 2  }
+      return m === MovingState.Stop ? state : state.x === -100 ? state : { ...state, x: state.x + 2  }
     case COM_NUDGE_RIGHT:
-      return m === MovingState.Stop ? state : state.x === 100 ? state : { ...state, x: state.x + 2  }
+      return m === MovingState.Stop ? state : state.x === 100 ? state : { ...state, x: state.x - 2  }
     case COM_NUDGE_UP:
-      return m === MovingState.Stop ? state : state.y === -100 ? state : { ...state, y: state.y - 2  }
+      return m === MovingState.Stop ? state : state.y === -100 ? state : { ...state, y: state.y + 2  }
     case COM_NUDGE_DOWN:
-      return m === MovingState.Stop ? state : state.y === 100 ? state : { ...state, y: state.y + 2  }
+      return m === MovingState.Stop ? state : state.y === 100 ? state : { ...state, y: state.y - 2  }
 
     // Center
     case COM_CENTER:
@@ -46,15 +46,15 @@ export default function location (state = initialState, action: LocationActionTy
 
         // If we were previously moving LEFT, nudge 1 step RIGHT to compensate 
         // for delay after saying "stop". Same for the other way around.
-        x: (m === MovingState.Left && 0 !== x)
-          ? x + 1 
-          : (m === MovingState.Right && 0 !== x) ?  x - 1 : x + 0,
+        // x: (m === MovingState.Left && 0 !== x)
+        //   ? x - 1 
+        //   : (m === MovingState.Right && 0 !== x) ?  x + 1 : x + 0,
           
         // If we were previously moving UP, nudge 1 step DOWN to compensate 
         // for delay after saying "stop". Same for the other way around. 
-        y: (m === MovingState.Up  && 0 !== y)
-          ? y + 1 
-          : (m === MovingState.Down && 0 !== y) ?  y - 1 : y + 0
+        // y: (m === MovingState.Up  && 0 !== y)
+        //   ? y - 1 
+        //   : (m === MovingState.Down && 0 !== y) ?  y + 1 : y + 0
       }
 
     default:

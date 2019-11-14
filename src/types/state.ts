@@ -58,6 +58,16 @@ export interface NudgeState {
     interval: NodeJS.Timeout | null
 }
 
+export enum UploaderStatus {
+  Browse,
+  Ready
+} 
+
+export interface UploaderState {
+  status: UploaderStatus
+  file: String | null
+}
+
 /**
  * Will return something like:
  * {

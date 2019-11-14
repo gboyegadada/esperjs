@@ -23,6 +23,7 @@ import {
 } from "../actions/zoom"
 
 import { TOGGLE_POWER } from "../types/action";
+import { COM_UPLOADER_BROWSE } from "../actions/uploader";
 
 export interface command {
   command: string
@@ -43,7 +44,8 @@ const vocab: command[] = [
   { command: 'center', keywords: ['center', 'centre', 'sent', 'Santa', 'Centre', 'centor', 'centa'], action: COM_CENTER, threshold: 1 },
   { command: 'shutdown', keywords: ['shut', 'down', 'shutdown', 'exit'], action: TOGGLE_POWER, threshold: 1 },
   { command: 'okay', keywords: ['okay', 'yes', 'yup', 'yep', 'roger', 'yeah', 'year', 'confirm', 'conform', 'affirmative', 'confirmed'], action: OKAY, threshold: 1 },
-  { command: 'cancel', keywords: ['cancel', 'counsel', 'council', 'no', 'nope', 'abort'], action: CANCEL, threshold: 1 }
+  { command: 'cancel', keywords: ['cancel', 'counsel', 'council', 'no', 'nope', 'abort'], action: CANCEL, threshold: 1 },
+  { command: 'upload', keywords: ['upload', 'browse', 'open'], action: COM_UPLOADER_BROWSE, threshold: 1 }
 ]
 
 window.SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
