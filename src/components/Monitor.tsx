@@ -48,7 +48,7 @@ export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Prop
   
   useEffect(() => {
     if (uploader.status === UploaderStatus.Browse) uploaderRef.current.click()
-  }, [uploader.status, uploaderRef.current])
+  }, [uploader.status])
 
   const handleUpload = (e: HTMLInputEvent) => {
     dispatch(capture(URL.createObjectURL(e.target.files[0])))

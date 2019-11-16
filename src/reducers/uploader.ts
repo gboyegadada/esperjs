@@ -1,5 +1,5 @@
 import { UploaderActionTypes } from '../types/action'
-import { ReceivedState, UploaderState, UploaderStatus } from '../types/state'
+import { UploaderState, UploaderStatus } from '../types/state'
 import { COM_UPLOADER_BROWSE, COM_UPLOADER_CAPTURE, COM_UPLOADER_READY, COM_UPLOADER_CLEAR } from '../actions/uploader'
 
 const initialState: UploaderState = {

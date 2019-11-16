@@ -11,7 +11,7 @@ const initialState: LocationState = {
 }
 
 export default function location (state = initialState, action: LocationActionTypes) {
-  const { moving: m, x, y } = state
+  const { moving: m } = state
   
   switch(action.type) {
     // Start moving: left | right | up | down
