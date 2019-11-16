@@ -6,6 +6,7 @@ import { capture } from '../actions/uploader';
 import '../styles/monitor.css'
 import Noise from './Noise';
 import Grid from './Grid';
+import Logo from './Logo';
 
 interface Props {
   uploader: UploaderState
@@ -57,8 +58,11 @@ export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Prop
     <div className='monitor w-100 mt-2'>
       <div className='frame' ref={frameRef}>
         <div className={`slide${on ? '' : ' hide'}`} style={slideStyle} ref={slideRef}>&nbsp;</div>
-      { on && <Grid /> }
-      { on && !uploader.file && <Noise /> }
+        <div className='logo-wrap h-100 d-flex justify-content-around'>
+        { !on && <Logo className='m-center esper-svg' width='160px' /> }
+        </div>
+        { on && <Grid /> }
+        { on && !uploader.file && <Noise /> }
       </div>
       <input type="file" className='hide' accept="image/*" style={{position: "absolute", top: "20px"}} ref={uploaderRef} onChange={handleUpload}/>
     </div>

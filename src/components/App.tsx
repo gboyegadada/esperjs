@@ -36,7 +36,7 @@ export class App extends Component<Props> {
             </div>
             <Prompt />
             <Monitor />
-            <Console />
+            { power.on && <Console /> }
           </header>
         </div>
       )
