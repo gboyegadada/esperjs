@@ -1,6 +1,12 @@
-const a = new AudioContext() // browsers limit the number of concurrent audio contexts, so you better re-use'em
+const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext
+const a = AudioContext ? new AudioContext() : null // browsers limit the number of concurrent audio contexts, so you better re-use'em
 
 export default function beep(vol: number = 40, freq: number = 700, duration: number = 300){
+  if (!a) {
+    console.error('Unable to use AudioContext 😶')
+    return
+  }
+
   const v = a.createOscillator()
   const u = a.createGain()
   
