@@ -1,0 +1,11 @@
+.x-readout {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10009;
+}
+
+.x-readout code {
+  font-size: 1.4em;
+  color: rgb(181, 186, 192);
+}

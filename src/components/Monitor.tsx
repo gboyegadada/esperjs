@@ -7,6 +7,7 @@ import '../styles/monitor.css'
 import Noise from './Noise';
 import Grid from './Grid';
 import Logo from './Logo';
+import Readout from './Readout';
 
 interface Props {
   uploader: UploaderState
@@ -45,6 +46,12 @@ export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Prop
     backgroundImage: `url(${uploader.file})`,
     backgroundRepeat: 'no-repeat', 
   }
+
+  const readoutProps = {
+    zm: z.scale, 
+    ew: l.x,
+    ns: l.y,
+  }
   
   useEffect(() => {
     if (uploader.status === UploaderStatus.Browse) uploaderRef.current.click()
@@ -63,6 +70,7 @@ export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Prop
         </div>
         <Grid on={on} />
         { on && !uploader.file && <Noise /> }
+        { on && uploader.file && <Readout {...readoutProps}/> }
       </div>
       <input type="file" className='hide' accept="image/*" style={{position: "absolute", top: "20px"}} ref={uploaderRef} onChange={handleUpload}/>
     </div>
