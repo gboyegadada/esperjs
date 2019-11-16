@@ -62,7 +62,12 @@ let running = false
 let stopped = true
 let away = false
 
-if ('SpeechRecognition' in window && window.SpeechRecognition) {
+if (
+  'SpeechRecognition' in window && 
+  'SpeechGrammarList' in window && 
+  window.SpeechRecognition &&
+  window.SpeechGrammarList
+  ) {
     // speech recognition API supported
     recognition = new window.SpeechRecognition();
 
@@ -72,9 +77,6 @@ if ('SpeechRecognition' in window && window.SpeechRecognition) {
     recognition.grammars = speechRecognitionList;
     recognition.interimResults = false;
     recognition.maxAlternatives = 4;
-    // try {
-    //   recognition.continuous = true;
-    // } catch (e) {}
 
     recognition.onresult = function(event) { 
       store.dispatch(processCommand(event.results[event.resultIndex]))
@@ -120,11 +122,11 @@ if ('SpeechRecognition' in window && window.SpeechRecognition) {
 
 } else {
   // speech recognition API not supported
-  throw 'Speech recognition API not supported 😶'
+  throw 'Speech recognition API is not supported 😶'
 }
 
 const startNow = () => {
-  if (!initialized || !recognition || stopped) return
+  if (!initialized || !recognition || stopped || running) return
 
   recognition.start()
   running = true

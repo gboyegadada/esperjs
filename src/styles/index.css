@@ -87,27 +87,12 @@ code, .code {
   right: 10px;
 }
 
-.monitor {
-  position: relative;
-  display: block;
-  height: 60vh;
-  width: 100%;
-  border-radius: 10px;
-  border: solid 2px #717681;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-  overflow: hidden;
-}
-
-.monitor .frame, 
-.monitor .frame .slide {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
 .d-flex {
   display: flex!important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .flex-row {

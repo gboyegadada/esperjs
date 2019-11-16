@@ -39,7 +39,7 @@ function* shudownAction(action: TogglePowerAction) {
 
         yield true
     } catch (e) {
-        console.debug('ERROR: It looks like speech recognition not supported here yet 😶.', e.message)
+        console.debug('It looks like speech recognition is not yet supported here 😶. ERROR: ', e.message)
     }
 }
 
