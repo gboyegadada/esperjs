@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import { MdBrightness1 } from 'react-icons/md';
 import { connect } from 'react-redux';
 import { ReceivedState } from '../types/state';

@@ -102,6 +102,10 @@ code, .code {
   flex-wrap: wrap;
 }
 
+.flex-no-wrap {
+  flex-wrap: nowrap;
+}
+
 .flex-row {
   flex-direction: row;
 }
@@ -156,6 +160,10 @@ code, .code {
 
 .vw-75 {
   width: 70vw;
+}
+
+.w-50 {
+  width: 50%;
 }
 
 .w-75 {

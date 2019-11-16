@@ -5,7 +5,7 @@ import { COM_NUDGE_LEFT, COM_NUDGE_RIGHT, COM_NUDGE_UP, COM_NUDGE_DOWN, setNudge
 import { COM_ZOOM_IN, COM_ZOOM_OUT } from "../actions/zoom"
 import { NudgeType } from "../types/action"
 
-const INTERVAL_MS = 500
+const INTERVAL_MS = 300
 
 // Automatically stop nudges before a new COM_MOVE_* or COM_ZOOM_* action gets to the reducer.
 const nudge: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (action: AnyAction) => {

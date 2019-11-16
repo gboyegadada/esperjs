@@ -3,11 +3,7 @@ import createLoop from '../utils/noiseEfx'
 
 import '../styles/canvas.css'
 
-interface Props {
-  
-}
-
-export default function Noise ({  }: Props) {
+export default function Noise () {
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -19,7 +15,7 @@ export default function Noise ({  }: Props) {
     // closer to analouge appearance
     canvas.width = canvas.height = 256
     createLoop(context)()    
-  }, [canvasRef.current])
+  })
 
   
 
