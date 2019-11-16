@@ -4,7 +4,7 @@
 
 
 ### Esper JS
-Fun simulation of the ESPER Machine from the photo analysis scene in Blade Runner (1982) using HTML5 speech recognition.
+Fun emulation of the ESPER Machine from the photo analysis scene in Blade Runner (1982) using HTML5 speech recognition.
 
 ### Requirements
 

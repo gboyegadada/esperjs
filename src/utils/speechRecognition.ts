@@ -1,13 +1,14 @@
 import { store } from "..";
 import { 
-  processCommand, 
   COM_STOP,
   COM_HELP,
   COM_ENHANCE,
   CANCEL,
   OKAY,
   invalidCommand,
-  COM_BACK
+  COM_BACK,
+  receiveCommand,
+  ready
 } from "../actions/commands";
 
 import {
@@ -25,6 +26,7 @@ import {
 
 import { TOGGLE_POWER } from "../types/action";
 import { COM_UPLOADER_BROWSE } from "../actions/uploader";
+import beep, { errorBeep } from "./audioEfx";
 
 export interface command {
   command: string
@@ -37,8 +39,8 @@ const vocab: command[] = [
   { command: 'enhance', keywords: ['enhance', 'hands', 'hand', 'han', 'hun'], action: COM_ENHANCE, threshold: 1 },
   { command: 'move left', keywords: ['left', 'lift', 'trackleft', 'tracklist', 'panleft', 'penlist', 'panelist', 'palette', 'palate', 'padlet', 'pilot'], action: COM_MOVE_LEFT, threshold: 1 },
   { command: 'move right', keywords: ['right', 'rite', 'wright', 'write', 'trackrite', 'trackright', 'ride', 'penrite'], action: COM_MOVE_RIGHT, threshold: 1 },
-  { command: 'move up', keywords: ['up', 'move-up', 'Up', 'hope'], action: COM_MOVE_UP, threshold: 1 },
-  { command: 'move down', keywords: ['move', 'down', 'gown', 'brown', 'dawn'], action: COM_MOVE_DOWN, threshold: 2 },
+  { command: 'move up', keywords: ['up', 'move-up', 'track', 'Up', 'hope'], action: COM_MOVE_UP, threshold: 1 },
+  { command: 'move down', keywords: ['move', 'track', 'down', 'gown', 'brown', 'dawn'], action: COM_MOVE_DOWN, threshold: 2 },
   { command: 'zoom out', keywords: ['zoom', 'pull', 'out'], action: COM_ZOOM_OUT, threshold: 2 },
   { command: 'zoom in', keywords: ['zoom', 'move', 'pull', 'pool', 'in', 'pulling', 'cooling', 'coolin'], action: COM_ZOOM_IN, threshold: 2 },
   { command: 'go back', keywords: ['go', 'back', 'pull', 'pool'], action: COM_BACK, threshold: 2 },
@@ -50,8 +52,8 @@ const vocab: command[] = [
   { command: 'upload', keywords: ['upload', 'browse', 'open'], action: COM_UPLOADER_BROWSE, threshold: 1 }
 ]
 
-window.SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
-window.SpeechGrammarList = (window as any).webkitSpeechGrammarList || (window as any).SpeechGrammarList;
+window.SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition
+window.SpeechGrammarList = (window as any).webkitSpeechGrammarList || (window as any).SpeechGrammarList
 
 let recognition: SpeechRecognition|null = null
 
@@ -60,6 +62,7 @@ const grammar = '#JSGF V1.0; grammar commands; public <sys> = shutdown | "shut d
 let initialized = false
 let lastStartedAt = 0 
 let interimTimeoutHandle: NodeJS.Timeout | null = null
+let readyTimeoutHandle: NodeJS.Timeout | null = null
 let running = false
 let stopped = true
 let away = false
@@ -78,22 +81,43 @@ if (
 
     recognition.grammars = speechRecognitionList;
     recognition.interimResults = false;
-    recognition.maxAlternatives = 4;
+    recognition.maxAlternatives = 4
 
-    recognition.onresult = function(event) { 
-      store.dispatch(processCommand(event.results[event.resultIndex]))
+    recognition.onresult = (event) => { 
+      const { dispatch } = store
+      const result = event.results[event.resultIndex]
+
+      const command = lookup(result)
+      if (command) {
+          dispatch(receiveCommand(command))
+          dispatch({ type: command.action })
+  
+          beep()
+      } else if (command && undefined !== command) {
+          console.log('SKIP_COMMAND', command)
+      } else {
+          dispatch(invalidCommand(result))
+          
+          errorBeep()
+      }
+  
+      if (readyTimeoutHandle) {
+        clearTimeout(readyTimeoutHandle)
+        readyTimeoutHandle = null
+      }
+      readyTimeoutHandle = setTimeout(() => dispatch(ready()), 900)
     }
 
-    recognition.onnomatch = function() { 
+    recognition.onnomatch = () => { 
       store.dispatch(invalidCommand(null))
     }
 
-    recognition.onstart = function() { 
+    recognition.onstart = () => { 
       console.log('Listening...')
       running = true
     }
 
-    recognition.onend = function() { 
+    recognition.onend = () => { 
       running = false
       if (interimTimeoutHandle || stopped || away) return
 
@@ -124,7 +148,7 @@ if (
 
 } else {
   // speech recognition API not supported
-  throw 'Speech recognition API is not supported 😶'
+  console.error('The speech recognition API is not yet supported in your browser 😶')
 }
 
 const startNow = () => {

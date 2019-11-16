@@ -1,32 +1,10 @@
-import { put, takeLatest, delay } from 'redux-saga/effects'
-import { ProcessCommandAction, TogglePowerAction, TOGGLE_POWER, ComBackAction } from '../types/action';
-import { lookup, startListen, stopListen } from '../utils/speechRecognition';
-import { receiveCommand, ready, invalidCommand, PROCESS_COMMAND, COM_STOP, COM_BACK } from '../actions/commands';
+import { put, takeLatest } from 'redux-saga/effects'
+import { TogglePowerAction, TOGGLE_POWER, ComBackAction } from '../types/action';
+import { startListen, stopListen } from '../utils/speechRecognition';
+import { COM_STOP, COM_BACK } from '../actions/commands';
 import { store } from '..';
-import beep, { errorBeep } from '../utils/audioEfx';
 import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN } from '../actions/location';
 import { COM_ZOOM_IN, COM_ZOOM_OUT } from '../actions/zoom';
-
-// worker Saga: will be fired on PROCESS_COMMAND actions
-function* processCommandAction(action: ProcessCommandAction) {
-
-    const command = lookup(action.result)
-    if (command) {
-        yield put(receiveCommand(command))
-        yield put({ type: command.action })
-
-        beep()
-    } else if (command && undefined !== command) {
-        console.log('SKIP_COMMAND', command)
-    } else {
-        yield put(invalidCommand(action.result))
-        
-        errorBeep()
-    }
-
-    yield delay(900)
-    yield put(ready())
-}
 
 function* backAction(action: ComBackAction) {
   const { commands } = store.getState()
@@ -79,7 +57,6 @@ function* shudownAction(action: TogglePowerAction) {
 }
 
 function* rootSaga() {
-    yield takeLatest(PROCESS_COMMAND, processCommandAction)
     yield takeLatest(COM_BACK, backAction)
     yield takeLatest(TOGGLE_POWER, shudownAction)
 }
