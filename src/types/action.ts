@@ -11,6 +11,7 @@ import {
     CANCEL,
     CLEAR_CONFIRM,
     CLEAR_COMMANDS,
+    COM_BACK,
 } from "../actions/commands"
 
 import { 
@@ -153,6 +154,10 @@ export interface ComStopAction {
     type: typeof COM_STOP
 }
 
+export interface ComBackAction {
+    type: typeof COM_BACK
+}
+
 export interface ComHelpAction {
     type: typeof COM_HELP
 }
@@ -182,7 +187,7 @@ export type NudgeType = typeof COM_NUDGE_LEFT | typeof COM_NUDGE_RIGHT | typeof 
 
 export type PowerActionTypes = TogglePowerAction
 export type ConfirmActions = ConfirmAction | ClearConfirmAction | OkayAction | CancelAction
-export type CommandActionTypes = ProcessCommandAction | ReceiveCommandAction | InvalidCommandAction | ClearCommandsAction | ReadyAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComZoomInAction | ComZoomOutAction | ComStopAction | ComHelpAction | ComEnhanceAction
+export type CommandActionTypes = ProcessCommandAction | ReceiveCommandAction | InvalidCommandAction | ClearCommandsAction | ReadyAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComZoomInAction | ComZoomOutAction | ComStopAction | ComBackAction | ComHelpAction | ComEnhanceAction
 export type LocationActionTypes = SetNudgeIntervalAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComNudgeLeftAction | ComNudgeRightAction | ComNudgeUpAction | ComNudgeDownAction | ComCenterAction | ComStopAction
 export type ZoomActionTypes = SetNudgeIntervalAction | SetZoomIntervalAction | ComZoomInAction | ComZoomOutAction | ComNudgeInAction | ComNudgeOutAction | ComEnhanceAction | ComStopAction
 export type UploaderActionTypes = ComUploaderBrowseAction | ComUploaderCaptureAction | ComUploaderClearAction | ComUploaderReadyAction

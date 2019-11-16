@@ -6,7 +6,8 @@ import {
   COM_ENHANCE,
   CANCEL,
   OKAY,
-  invalidCommand
+  invalidCommand,
+  COM_BACK
 } from "../actions/commands";
 
 import {
@@ -39,7 +40,8 @@ const vocab: command[] = [
   { command: 'move up', keywords: ['up', 'move-up', 'Up', 'hope'], action: COM_MOVE_UP, threshold: 1 },
   { command: 'move down', keywords: ['move', 'down', 'gown', 'brown', 'dawn'], action: COM_MOVE_DOWN, threshold: 2 },
   { command: 'zoom out', keywords: ['zoom', 'pull', 'out'], action: COM_ZOOM_OUT, threshold: 2 },
-  { command: 'zoom in', keywords: ['zoom', 'move', 'pull', 'pool', 'in', 'pulling', 'cooling', 'coolin', 'Poland', 'kulin', 'brewing'], action: COM_ZOOM_IN, threshold: 2 },
+  { command: 'zoom in', keywords: ['zoom', 'move', 'pull', 'pool', 'in', 'pulling', 'cooling', 'coolin'], action: COM_ZOOM_IN, threshold: 2 },
+  { command: 'go back', keywords: ['go', 'back', 'pull', 'pool'], action: COM_BACK, threshold: 2 },
   { command: 'help', keywords: ['help'], action: COM_HELP, threshold: 1 },
   { command: 'center', keywords: ['center', 'centre', 'sent', 'Santa', 'Centre', 'centor', 'centa'], action: COM_CENTER, threshold: 1 },
   { command: 'shutdown', keywords: ['shut', 'down', 'shutdown', 'exit'], action: TOGGLE_POWER, threshold: 1 },
@@ -62,7 +64,12 @@ let running = false
 let stopped = true
 let away = false
 
-if ('SpeechRecognition' in window && window.SpeechRecognition) {
+if (
+  'SpeechRecognition' in window && 
+  'SpeechGrammarList' in window && 
+  window.SpeechRecognition &&
+  window.SpeechGrammarList
+  ) {
     // speech recognition API supported
     recognition = new window.SpeechRecognition();
 
@@ -72,9 +79,6 @@ if ('SpeechRecognition' in window && window.SpeechRecognition) {
     recognition.grammars = speechRecognitionList;
     recognition.interimResults = false;
     recognition.maxAlternatives = 4;
-    // try {
-    //   recognition.continuous = true;
-    // } catch (e) {}
 
     recognition.onresult = function(event) { 
       store.dispatch(processCommand(event.results[event.resultIndex]))
@@ -120,11 +124,11 @@ if ('SpeechRecognition' in window && window.SpeechRecognition) {
 
 } else {
   // speech recognition API not supported
-  throw 'Speech recognition API not supported 😶'
+  throw 'Speech recognition API is not supported 😶'
 }
 
 const startNow = () => {
-  if (!initialized || !recognition || stopped) return
+  if (!initialized || !recognition || stopped || running) return
 
   recognition.start()
   running = true
