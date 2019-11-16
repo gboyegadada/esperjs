@@ -20,9 +20,15 @@
 }
 
 .monitor .esper-svg  {
-  opacity: .1;
+  opacity: .5;
+  z-index: 10005;
 }
 
 .monitor .esper-svg path.bg {
   fill-opacity: 1;
+  fill: #1e1f20!important; 
+}
+
+.esper-svg path.fg {
+  fill: #484c55!important; /* rgba(236, 234, 234, 0.76); */
 }

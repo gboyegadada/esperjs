@@ -61,7 +61,7 @@ export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Prop
         <div className='logo-wrap h-100 d-flex justify-content-around'>
         { !on && <Logo className='m-center esper-svg' width='160px' /> }
         </div>
-        { on && <Grid /> }
+        <Grid on={on} />
         { on && !uploader.file && <Noise /> }
       </div>
       <input type="file" className='hide' accept="image/*" style={{position: "absolute", top: "20px"}} ref={uploaderRef} onChange={handleUpload}/>

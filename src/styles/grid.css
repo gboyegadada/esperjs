@@ -13,9 +13,15 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   column-gap: 0px;
   row-gap: 0px;
+
+  opacity: .6;
 }
 
 .x-grid .x-grid-item {
   border-bottom: dotted 1px rgba(248, 248, 248, 0.2);
   border-right: dotted 1px rgba(248, 248, 248, 0.2);
+}
+
+.x-grid.active {
+  opacity: 1;
 }
