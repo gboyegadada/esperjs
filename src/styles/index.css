@@ -73,36 +73,6 @@ code, .code {
   color: beige;
   border: solid 1px #fff;
 }
-
-.console {
-  position: relative;
-  display: block;
-  border-radius: 5px;
-  border: solid 1px #717681;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-.console ul {
-  list-style: none;
-  padding: 0 10px;
-  height: 20vh;
-  overflow-y: auto;
-  border-left: solid 1px #366141;
-  margin-left: 14px;
-}
-
-.console ul > li {
-  font-size: 0.7em;
-  text-align: left;
-  color: #1b9a3c;
-}
-
-.console .led {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
 .d-flex {
   display: flex!important;
 }

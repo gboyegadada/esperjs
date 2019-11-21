@@ -8,9 +8,10 @@ import location from '../reducers/location'
 import zoom from '../reducers/zoom'
 import nudge from '../reducers/nudge'
 import uploader from '../reducers/uploader'
+import console from '../reducers/console'
 
 const rootReducer = combineReducers({ 
-    power, commands, location, zoom, nudge, uploader, received, confirm
+    power, commands, location, zoom, nudge, uploader, received, confirm, console
 })
 
 export default rootReducer

@@ -27,6 +27,8 @@ import {
 import { TOGGLE_POWER } from "../types/action";
 import { COM_UPLOADER_BROWSE, COM_UPLOADER_CLEAR } from "../actions/uploader";
 import beep, { errorBeep } from "./audioEfx";
+import { log } from "../actions/console";
+import { LogLevel } from "../types/state";
 
 export interface command {
   command: string
@@ -154,7 +156,8 @@ if (
 
 } else {
   // speech recognition API not supported
-  console.error('The speech recognition API is not yet supported in your browser 😶')
+  const { dispatch } = store
+  dispatch(log('It looks like speech recognition API is not yet supported in your browser 😶', LogLevel.Warning))
 }
 
 const startNow = () => {

@@ -9,7 +9,7 @@ interface Props {
 export function Prompt ({ confirm }: Props) {
     return (
         <>
-        { null !== confirm &&
+        { false && null !== confirm &&
             <div className='prompt p2 w-100'>
                 <code>{confirm.message}</code>
             </div> 
