@@ -156,8 +156,7 @@ if (
 
 } else {
   // speech recognition API not supported
-  const { dispatch } = store
-  dispatch(log('It looks like speech recognition API is not yet supported in your browser 😶', LogLevel.Warning))
+  console.error('It looks like speech recognition API is not yet supported in your browser 😶')
 }
 
 const startNow = () => {
