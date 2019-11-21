@@ -5,7 +5,7 @@ import { COM_STOP, COM_BACK } from '../actions/commands';
 import { store } from '..';
 import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN } from '../actions/location';
 import { COM_ZOOM_IN, COM_ZOOM_OUT } from '../actions/zoom';
-import { echo } from '../actions/console';
+import { echo, clear } from '../actions/console';
 import { LogLevel } from '../types/state';
 
 function* backAction(action: ComBackAction) {
@@ -52,6 +52,7 @@ function* shudownAction(action: TogglePowerAction) {
         } else {
           // ESPER is **OFF** so stop listening...
           stopListen()
+          yield put(clear())
         }
 
         yield true
