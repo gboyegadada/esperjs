@@ -13,6 +13,9 @@ const nudge: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (action: A
 
   if (/^(COM_MOVE_|COM_ZOOM_)/.test(action.type)) {
 
+    const { uploader: { file } } = store.getState()
+    if (!file) return
+
     // 1. Stop any active PANNING / ZOOMING 
     store.dispatch(stop())
 
