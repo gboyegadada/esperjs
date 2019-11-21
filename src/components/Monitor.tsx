@@ -69,7 +69,7 @@ export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Prop
         { !on && <Logo className='m-center esper-svg' width='160px' /> }
         </div>
         <Grid on={on} />
-        { on && !uploader.file && <Noise /> }
+        { on && <Noise uploader={uploader} /> }
         { on && uploader.file && <Readout {...readoutProps}/> }
       </div>
       <input type="file" className='hide' accept="image/*" style={{position: "absolute", top: "20px"}} ref={uploaderRef} onChange={handleUpload}/>

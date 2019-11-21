@@ -15,3 +15,9 @@ export const browse = () => {
     type: COM_UPLOADER_BROWSE,
   }
 }
+
+export const eject = () => {
+  return {
+    type: COM_UPLOADER_CLEAR,
+  }
+}

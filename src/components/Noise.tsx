@@ -2,8 +2,13 @@ import React, { useRef, useEffect } from 'react'
 import createLoop from '../utils/noiseEfx'
 
 import '../styles/canvas.css'
+import { UploaderState } from '../types/state'
 
-export default function Noise () {
+interface Props {
+  uploader: UploaderState
+}
+
+export default function Noise ({ uploader }: Props) {
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -17,9 +22,7 @@ export default function Noise () {
     createLoop(context)()    
   })
 
-  
-
   return (
-    <canvas className='noise' ref={canvasRef} ></canvas>
+    <canvas className={`noise ${!uploader.file ? '' : 'hide'}`} ref={canvasRef} ></canvas>
     )
 }
