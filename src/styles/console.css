@@ -1,0 +1,53 @@
+
+
+.console {
+  position: relative;
+  display: block;
+  border-radius: 5px;
+  border: solid 1px #717681;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.console ul {
+  list-style: none;
+  padding: 0 10px;
+  height: 20vh;
+  overflow-y: auto;
+  border-left: solid 1px #366141;
+  margin-left: 14px;
+}
+
+.console ul > li {
+  font-size: 0.7em;
+  text-align: left;
+  color: #1b9a3c;
+}
+
+.console .led {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+[class*='log-level-'] {
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.log-level-info {
+  color: #1b9a3c!important;
+}
+
+.log-level-warning {
+  color: #f7ae41!important;
+  background-color: rgba(195, 163, 70, 0.3);
+}
+
+.log-level-error {
+  color: #ea7474!important;
+  background-color: rgba(191, 13, 13, 0.31);
+}
+
+.log-level-debug {
+  color: #8f8e8e!important;
+}

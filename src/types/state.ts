@@ -68,6 +68,24 @@ export interface UploaderState {
   file: String | null
 }
 
+
+export enum LogLevel {
+  Info,
+  Warning,
+  Error,
+  Debug
+}
+
+export interface ConsoleMessage {
+  text: string
+  level: LogLevel
+  timestamp: number
+}
+
+export interface ConsoleSate {
+  messages: ConsoleMessage[]
+}
+
 /**
  * Will return something like:
  * {

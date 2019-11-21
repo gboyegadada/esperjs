@@ -5,6 +5,8 @@ import { COM_STOP, COM_BACK } from '../actions/commands';
 import { store } from '..';
 import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN } from '../actions/location';
 import { COM_ZOOM_IN, COM_ZOOM_OUT } from '../actions/zoom';
+import { echo } from '../actions/console';
+import { LogLevel } from '../types/state';
 
 function* backAction(action: ComBackAction) {
   const { commands } = store.getState()
@@ -43,18 +45,23 @@ function* shudownAction(action: TogglePowerAction) {
     const { power } = store.getState()
     
     try {
-        power.on 
-            // ESPER is **ON** so start listening...
-            ? startListen()
-            
-            // ESPER is **OFF** so stop listening...
-            : stopListen()
+        if (power.on) {
+          // ESPER is **ON** so start listening...
+          startListen()
+          yield put(echo('Say "shut down" and then say "okay" to confirm or "cancel" to abort...'))
+        } else {
+          // ESPER is **OFF** so stop listening...
+          stopListen()
+        }
 
         yield true
     } catch (e) {
-        console.debug('It looks like speech recognition is not yet supported here 😶. ERROR: ', e.message)
+        yield put(echo('It looks like speech recognition is not yet supported here 😶.', LogLevel.Warning))
+
+        console.error('ERROR: ', e.message)
     }
 }
+
 
 function* rootSaga() {
     yield takeLatest(COM_BACK, backAction)

@@ -37,8 +37,9 @@ import {
     COM_NUDGE_OUT,
 } from "../actions/nudge"
 
-import { CommandState, ConfirmState } from "./state"
+import { CommandState, ConfirmState, LogLevel } from "./state"
 import { COM_UPLOADER_BROWSE, COM_UPLOADER_CAPTURE, COM_UPLOADER_READY, COM_UPLOADER_CLEAR } from "../actions/uploader"
+import { CON_LOG, CON_ECHO, CON_CLEAR } from "../actions/console"
 
 export const TOGGLE_POWER = 'TOGGLE_POWER'
 
@@ -177,6 +178,22 @@ export interface ComUploaderClearAction {
     type: typeof COM_UPLOADER_CLEAR
 }
 
+export interface ConsoleLogAction {
+    type: typeof CON_LOG
+    message: string
+    level: LogLevel
+}
+
+export interface ConsoleEchoAction {
+    type: typeof CON_ECHO
+    message: string
+    level: LogLevel
+}
+
+export interface ConsoleClearAction {
+    type: typeof CON_CLEAR
+}
+
 export type NudgeType = typeof COM_NUDGE_LEFT | typeof COM_NUDGE_RIGHT | typeof COM_NUDGE_UP | typeof COM_NUDGE_DOWN | typeof COM_NUDGE_IN |  typeof COM_NUDGE_OUT
 
 export type PowerActionTypes = TogglePowerAction
@@ -185,3 +202,4 @@ export type CommandActionTypes = ReceiveCommandAction | InvalidCommandAction | C
 export type LocationActionTypes = SetNudgeIntervalAction | ComMoveLeftAction | ComMoveRightAction | ComMoveUpAction | ComMoveDownAction | ComNudgeLeftAction | ComNudgeRightAction | ComNudgeUpAction | ComNudgeDownAction | ComCenterAction | ComStopAction
 export type ZoomActionTypes = SetNudgeIntervalAction | SetZoomIntervalAction | ComZoomInAction | ComZoomOutAction | ComNudgeInAction | ComNudgeOutAction | ComEnhanceAction | ComStopAction
 export type UploaderActionTypes = ComUploaderBrowseAction | ComUploaderCaptureAction | ComUploaderClearAction | ComUploaderReadyAction
+export type ConsoleActionTypes = ConsoleLogAction|ConsoleEchoAction|ConsoleClearAction

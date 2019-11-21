@@ -4,6 +4,7 @@ import { COM_MOVE_LEFT, COM_MOVE_RIGHT, COM_MOVE_UP, COM_MOVE_DOWN } from "../ac
 import { COM_NUDGE_LEFT, COM_NUDGE_RIGHT, COM_NUDGE_UP, COM_NUDGE_DOWN, setNudgeInterval, COM_NUDGE_IN, COM_NUDGE_OUT } from "../actions/nudge"
 import { COM_ZOOM_IN, COM_ZOOM_OUT } from "../actions/zoom"
 import { NudgeType } from "../types/action"
+import { log } from "../actions/console"
 
 const INTERVAL_MS = 300
 
@@ -17,26 +18,33 @@ const nudge: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (action: A
 
     // 2. Set an interval that will dispatch NUDGE actions for the right MOVE / ZOOM action
     let NUDGE_ACTION_TYPE: NudgeType | null = null
+    let MSG: string
 
     switch(action.type) {
       // Start moving: left | right | up | down
       case COM_MOVE_LEFT:
         NUDGE_ACTION_TYPE = COM_NUDGE_LEFT
+        MSG = 'Tracking left...'
         break
       case COM_MOVE_RIGHT:
         NUDGE_ACTION_TYPE = COM_NUDGE_RIGHT
+        MSG = 'Tracking right...'
         break
       case COM_MOVE_UP:
         NUDGE_ACTION_TYPE = COM_NUDGE_UP
+        MSG = 'Pulling up...'
         break
       case COM_MOVE_DOWN:
         NUDGE_ACTION_TYPE = COM_NUDGE_DOWN
+        MSG = 'Moving down...'
         break
       case COM_ZOOM_IN:
         NUDGE_ACTION_TYPE = COM_NUDGE_IN
+        MSG = 'Pulling in...'
         break
       case COM_ZOOM_OUT:
         NUDGE_ACTION_TYPE = COM_NUDGE_OUT
+        MSG = 'Pulling out...'
         break
     }
     
@@ -46,6 +54,7 @@ const nudge: Middleware<Dispatch> = (store: MiddlewareAPI) => next => (action: A
       }, INTERVAL_MS))
       
       store.dispatch(intervalAction)
+      store.dispatch(log(MSG))
     }
   }
   
