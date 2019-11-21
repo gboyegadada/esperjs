@@ -18,6 +18,7 @@ code, .code {
 }
 
 .btn span {
+  font-size: 18px;
   color: #3e4450;
 }
 
@@ -25,12 +26,20 @@ code, .code {
   color: #717681;
 }
 
-.btn.btn-power svg {
+.btn svg {
   color: #3e4450;
   transition: color 200ms;
 }
 
 .btn.btn-power.on svg {
+  color: rgb(118, 187, 27);
+}
+
+.btn.btn-eject span {
+  color: #717681;
+}
+
+.btn.btn-eject svg {
   color: rgb(118, 187, 27);
 }
 
@@ -128,6 +137,10 @@ code, .code {
 
 .ml-1 {
   margin-left: 0.3rem!important;
+}
+
+.mr-1 {
+  margin-right: 0.3rem!important;
 }
 
 .mt-1 {

@@ -25,7 +25,7 @@ import {
 } from "../actions/zoom"
 
 import { TOGGLE_POWER } from "../types/action";
-import { COM_UPLOADER_BROWSE } from "../actions/uploader";
+import { COM_UPLOADER_BROWSE, COM_UPLOADER_CLEAR } from "../actions/uploader";
 import beep, { errorBeep } from "./audioEfx";
 
 export interface command {
@@ -39,17 +39,18 @@ const vocab: command[] = [
   { command: 'enhance', keywords: ['enhance', 'hands', 'hand', 'han', 'hun'], action: COM_ENHANCE, threshold: 1 },
   { command: 'move left', keywords: ['left', 'lift', 'trackleft', 'tracklist', 'panleft', 'penlist', 'panelist', 'palette', 'palate', 'padlet', 'pilot'], action: COM_MOVE_LEFT, threshold: 1 },
   { command: 'move right', keywords: ['right', 'rite', 'wright', 'write', 'trackrite', 'trackright', 'ride', 'penrite'], action: COM_MOVE_RIGHT, threshold: 1 },
-  { command: 'move up', keywords: ['up', 'move-up', 'track', 'Up', 'hope'], action: COM_MOVE_UP, threshold: 1 },
+  { command: 'move up', keywords: ['up', 'move-up', 'Up', 'hope'], action: COM_MOVE_UP, threshold: 1 },
   { command: 'move down', keywords: ['move', 'track', 'down', 'gown', 'brown', 'dawn'], action: COM_MOVE_DOWN, threshold: 2 },
   { command: 'zoom out', keywords: ['zoom', 'pull', 'out'], action: COM_ZOOM_OUT, threshold: 2 },
-  { command: 'zoom in', keywords: ['zoom', 'move', 'pull', 'pool', 'in', 'pulling', 'cooling', 'coolin'], action: COM_ZOOM_IN, threshold: 2 },
+  { command: 'zoom in', keywords: ['zoom', 'move', 'pull', 'pool', 'in', 'up', 'pulling', 'cooling', 'coolin'], action: COM_ZOOM_IN, threshold: 2 },
   { command: 'go back', keywords: ['go', 'back', 'pull', 'pool'], action: COM_BACK, threshold: 2 },
   { command: 'help', keywords: ['help'], action: COM_HELP, threshold: 1 },
   { command: 'center', keywords: ['center', 'centre', 'sent', 'Santa', 'Centre', 'centor', 'centa'], action: COM_CENTER, threshold: 1 },
   { command: 'shutdown', keywords: ['shut', 'down', 'shutdown', 'exit'], action: TOGGLE_POWER, threshold: 1 },
   { command: 'okay', keywords: ['okay', 'yes', 'yup', 'yep', 'roger', 'yeah', 'year', 'confirm', 'conform', 'affirmative', 'confirmed'], action: OKAY, threshold: 1 },
   { command: 'cancel', keywords: ['cancel', 'counsel', 'council', 'no', 'nope', 'abort'], action: CANCEL, threshold: 1 },
-  { command: 'upload', keywords: ['upload', 'browse', 'open'], action: COM_UPLOADER_BROWSE, threshold: 1 }
+  { command: 'upload', keywords: ['upload', 'browse', 'open'], action: COM_UPLOADER_BROWSE, threshold: 1 },
+  { command: 'eject', keywords: ['eject', 'close'], action: COM_UPLOADER_CLEAR, threshold: 1 }
 ]
 
 window.SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition
@@ -84,18 +85,23 @@ if (
     recognition.maxAlternatives = 4
 
     recognition.onresult = (event) => { 
+      console.group('RECOG')
+
       const { dispatch } = store
       const result = event.results[event.resultIndex]
+      console.log('Result:', {result})
 
       const command = lookup(result)
       if (command) {
+          console.groupEnd()
           dispatch(receiveCommand(command))
           dispatch({ type: command.action })
   
           beep()
       } else if (command && undefined !== command) {
-          console.log('SKIP_COMMAND', command)
+          console.log('Skipping command:', {command})
       } else {
+          console.groupEnd()
           dispatch(invalidCommand(result))
           
           errorBeep()
