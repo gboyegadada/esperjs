@@ -74,3 +74,13 @@ li[class*='log-level-'] {
 .log-level-debug {
   color: #8f8e8e!important;
 }
+
+.log-level-success {
+  color: #41f759!important;
+  background-color: rgba(70, 195, 91, 0.3);
+}
+
+.log-level-success::before {
+  background-color: rgba(102, 218, 122, 0.3);
+  border-color: rgba(133, 223, 91, 0.849);
+}

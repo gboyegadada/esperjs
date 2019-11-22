@@ -40,7 +40,7 @@ const vocab: command[] = [
   { command: 'move left', keywords: ['left', 'lift', 'trackleft', 'tracklist', 'panleft', 'penlist', 'panelist', 'palette', 'palate', 'padlet', 'pilot'], action: COM_MOVE_LEFT, threshold: 1 },
   { command: 'move right', keywords: ['right', 'rite', 'wright', 'write', 'trackrite', 'trackright', 'ride', 'penrite'], action: COM_MOVE_RIGHT, threshold: 1 },
   { command: 'move up', keywords: ['up', 'move-up', 'Up', 'hope'], action: COM_MOVE_UP, threshold: 1 },
-  { command: 'move down', keywords: ['move', 'track', 'down', 'gown', 'brown', 'dawn'], action: COM_MOVE_DOWN, threshold: 2 },
+  { command: 'move down', keywords: ['move', 'go', 'track', 'down', 'gown', 'brown', 'dawn'], action: COM_MOVE_DOWN, threshold: 2 },
   { command: 'zoom out', keywords: ['zoom', 'pull', 'out'], action: COM_ZOOM_OUT, threshold: 2 },
   { command: 'zoom in', keywords: ['zoom', 'move', 'pull', 'pool', 'in', 'up', 'pulling', 'cooling', 'coolin'], action: COM_ZOOM_IN, threshold: 2 },
   { command: 'go back', keywords: ['go', 'back', 'pull', 'pool'], action: COM_BACK, threshold: 2 },
@@ -58,7 +58,7 @@ window.SpeechGrammarList = (window as any).webkitSpeechGrammarList || (window as
 
 let recognition: SpeechRecognition|null = null
 
-const grammar = '#JSGF V1.0; grammar commands; public <sys> = shutdown | "shut down" | exit | help; public <move> = move | pan | track | scroll; public <zoom> = zoom | pull; public <stop> = stop | wait | "wait a minute" | hold | "hold on"; public <other.action> =  enhance | center; public <confirm> = okay | cancel | yes | no; public <direction> = up | down | left | right; public <command.move> = <move> <direction>; public <command.zoom> = <zoom> (in | out);'
+const grammar = '#JSGF V1.0; grammar commands; public <sys> = shutdown | "shut down" | exit | eject | close | help | upload | open | browse; public <move> = move | pan | track | scroll | go; public <zoom> = zoom | pull; public <stop> = stop | wait | "wait a minute" | hold | "hold on"; public <other.action> =  enhance | center; public <confirm> = okay | cancel | yes | no; public <direction> = up | down | left | right | back; public <command.move> = <move> <direction>; public <command.zoom> = <zoom> (in | out);'
 
 let initialized = false
 let lastStartedAt = 0 
