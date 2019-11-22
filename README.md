@@ -6,11 +6,17 @@
 ### Esper JS
 Fun emulation of the ESPER Machine from the photo analysis scene in Blade Runner (1982) using HTML5 speech recognition.
 
+![Esper Overview](./public/esper-overview.png)
+
+---
+
 ### Requirements
 
 This only works in Chrome on Windows 10 as of November 12, 2019.
 
 ![Web Speech API Browser Support](./public/speech-recognition-support.png)
+
+---
 
 ### Reference
 

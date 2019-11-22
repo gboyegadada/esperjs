@@ -45,7 +45,7 @@ function* shudownAction(action: TogglePowerAction) {
     const { power } = store.getState()
     
     try {
-        if (power.on && false && startListen()) {
+        if (power.on && startListen()) {
           // ESPER is **ON** so start listening...
           yield put(echo('Say "shut down" and then say "okay" to confirm or "cancel" to abort...'))
         } 
