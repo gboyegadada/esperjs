@@ -18,16 +18,17 @@
 }
 
 .console ul > li {
-  font-size: 16px;
+  font-size: 14px;
   text-align: left;
   color: #1b9a3c;
   margin-top: 3px;
 }
 
-[class*='log-level-'] {
+li[class*='log-level-'] {
   border-radius: 4px;
   padding: 3px;
   padding-left: 6px;
+  margin-top: 4px!important;
 }
 
 [class*='log-level-']::before {
