@@ -45,19 +45,20 @@ function* shudownAction(action: TogglePowerAction) {
     const { power } = store.getState()
     
     try {
-        if (power.on) {
+        if (power.on && startListen()) {
           // ESPER is **ON** so start listening...
-          startListen()
           yield put(echo('Say "shut down" and then say "okay" to confirm or "cancel" to abort...'))
-        } else {
+        } 
+        
+        else if (!power.on) {
           // ESPER is **OFF** so stop listening...
           stopListen()
           yield put(clear())
         }
 
-        yield true
+        else yield put(echo('It looks like speech recognition is not yet supported here 😶.', LogLevel.Error))
     } catch (e) {
-        yield put(echo('It looks like speech recognition is not yet supported here 😶.', LogLevel.Warning))
+        yield put(echo('It looks like speech recognition is not yet supported here 😶.', LogLevel.Error))
 
         console.error('ERROR: ', e.message)
     }

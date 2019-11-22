@@ -14,28 +14,40 @@
   height: 20vh;
   overflow-y: auto;
   border-left: solid 1px #366141;
-  margin-left: 14px;
+  margin: 6px 14px;
 }
 
 .console ul > li {
-  font-size: 0.7em;
+  font-size: 16px;
   text-align: left;
   color: #1b9a3c;
-}
-
-.console .led {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  margin-top: 3px;
 }
 
 [class*='log-level-'] {
-  border-radius: 3px;
-  padding: 4px;
+  border-radius: 4px;
+  padding: 3px;
+  padding-left: 6px;
+}
+
+[class*='log-level-']::before {
+  position: relative;
+  top: -1px;
+  content: '';
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border-width: 1px;
+  margin-right: 6px;
 }
 
 .log-level-info {
   color: #1b9a3c!important;
+}
+
+.log-level-info::before {
+  display: none;
 }
 
 .log-level-warning {
@@ -43,9 +55,19 @@
   background-color: rgba(195, 163, 70, 0.3);
 }
 
+.log-level-warning::before {
+  background-color: rgba(177, 143, 43, 0.849);
+  border-color: rgba(223, 190, 91, 0.849);
+}
+
 .log-level-error {
   color: #ea7474!important;
   background-color: rgba(191, 13, 13, 0.31);
+}
+
+.log-level-error::before {
+  background-color: rgba(218, 64, 64, 0.849);
+  border-color: #ea7474!important;
 }
 
 .log-level-debug {

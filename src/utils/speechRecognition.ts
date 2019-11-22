@@ -27,8 +27,6 @@ import {
 import { TOGGLE_POWER } from "../types/action";
 import { COM_UPLOADER_BROWSE, COM_UPLOADER_CLEAR } from "../actions/uploader";
 import beep, { errorBeep } from "./audioEfx";
-import { log } from "../actions/console";
-import { LogLevel } from "../types/state";
 
 export interface command {
   command: string
@@ -170,7 +168,7 @@ const startNow = () => {
 export const startListen = () => {
   if (running) stopListen()
 
-  if (!initialized || !recognition) return
+  if (!initialized || !recognition) return false
 
   stopped = false
 
@@ -179,6 +177,8 @@ export const startListen = () => {
 
   if (timeSinceLastStart < 1000) interimTimeoutHandle = setTimeout(startNow, 1000 - timeSinceLastStart)
   else startNow()
+
+  return true
 }
 
 export const stopListen = () => {

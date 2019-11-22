@@ -8,6 +8,7 @@ import Noise from './Noise';
 import Grid from './Grid';
 import Logo from './Logo';
 import Readout from './Readout';
+import Indicator from './Indicator';
 
 interface Props {
   uploader: UploaderState
@@ -68,6 +69,7 @@ export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Prop
         <div className='logo-wrap h-100 d-flex justify-content-around'>
         { !on && <Logo className='m-center esper-svg' width='160px' /> }
         </div>
+        <Indicator successClassName='led led-success' dangerClassName='led led-danger'/>
         <Grid on={on} />
         { on && <Noise uploader={uploader} /> }
         { on && uploader.file && <Readout {...readoutProps}/> }

@@ -56,7 +56,7 @@ code, .code {
 }
 
 .led.led-sleep {
-  color: gray;
+  color: rgba(128, 128, 128, 0.815);
 }
 
 .led.led-success {
