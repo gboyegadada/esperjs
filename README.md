@@ -12,13 +12,15 @@ Fun emulation of the ESPER Machine from the photo analysis scene in Blade Runner
 
 ### Requirements
 
-This only works in Chrome on Windows 10 as of November 12, 2019.
+This only works in Google Chrome (Win / Mac OS) as of November 22, 2019.
 
 ![Web Speech API Browser Support](./public/speech-recognition-support.png)
 
 ---
 
 ### Reference
+
+- [Blade Runner (1982) - IMDb](https://wwww.imdb.com/title/tt0083658/)
 
 - [Speech Recognition in JavaScript Apps by Hasan Ahmad](https://www.dev6.com/javascript/speech-recognition-in-javascript-apps/)
 
