@@ -74,7 +74,8 @@ export enum LogLevel {
   Warning,
   Error,
   Debug,
-  Success
+  Success,
+  None
 }
 
 export interface ConsoleMessage {

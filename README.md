@@ -10,6 +10,26 @@ Fun emulation of the ESPER Machine from the photo analysis scene in Blade Runner
 
 ---
 
+### Usage :speaking_head:
+
+:minidisc: To open an image, say "upload" and choose a high resolution JPEG / PNG photo.
+
+:arrow_left: :arrow_right: To move left or right, say "track left" / "move left" / "track right" / "move right".
+
+:arrow_up_down: To move up or down, say "move up" / "move down".
+
+:mag: To zoom, say "zoom in" / "pull in" / "zoom out" / "pull out".
+
+:stop_button: To stop, say "stop" / "hold" / "wait"
+
+:negative_squared_cross_mark: To eject or close, say "eject" / "close".
+
+:x: To shutdown, say "shut down" 
+
+:ok: Say "okay" to confirm or "cancel" to abort...
+
+---
+
 ### Requirements
 
 This only works in Google Chrome (Win / Mac OS) as of November 22, 2019.

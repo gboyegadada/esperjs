@@ -20,6 +20,9 @@ const getLevelClass = (level: LogLevel) => {
       return 'log-level-warning'
     case LogLevel.Error:
       return 'log-level-error'
+    case LogLevel.None:
+    default:
+      return 'log-level-none'
 
   }
 }
@@ -34,7 +37,11 @@ export function Console ({ console, power }: Props) {
         <div className='console w-100 pt-2 pb-1 mt-2'>
             <ul ref={ulRef} className={`d-flex flex-col justify-content-start code ${power.on ? '' : 'hide' }`}>
               {console.messages.map((line, k) => (
-                <li key={k} data-ts={line.timestamp} className={`${getLevelClass(line.level)}`}>{line.text}</li>
+                <li key={k} data-ts={line.timestamp} className={`${getLevelClass(line.level)}`}>
+                  {!line.text.includes('\n') ? line.text : line.text.split('\n').map((t, j) => (
+                    <span key={j}>{t}</span>
+                  ))}
+                </li>
               ))}
             </ul>
         </div>
