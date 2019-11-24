@@ -47,7 +47,7 @@ function* shudownAction(action: TogglePowerAction) {
     try {
         if (power.on && startListen()) {
           // ESPER is **ON** so start listening...
-          yield put(echo('To get started, say "help"...'))
+          yield put(echo('Say "shut down" and then say "okay" to confirm or "cancel" to abort.\n For help, say "help"...'))
         } 
         
         else if (!power.on) {
