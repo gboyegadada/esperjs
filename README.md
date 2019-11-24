@@ -10,7 +10,7 @@ Fun emulation of the ESPER Machine from the photo analysis scene in Blade Runner
 
 ---
 
-### Usage :speaking_head:
+### Usage 
 
 :minidisc: To open an image, say "upload" and choose a high resolution JPEG / PNG photo.
 
