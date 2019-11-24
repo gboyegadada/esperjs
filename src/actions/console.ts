@@ -4,7 +4,7 @@ export const CON_ECHO = 'CON_ECHO'
 export const CON_LOG = 'CON_LOG'
 export const CON_CLEAR = 'CON_CLEAR'
 
-export function echo(message: string, level: LogLevel = LogLevel.Info) {
+export function echo(message: string, level: LogLevel = LogLevel.None) {
   return {
     type: CON_ECHO,
     message,
@@ -12,7 +12,7 @@ export function echo(message: string, level: LogLevel = LogLevel.Info) {
   }
 }
 
-export function log(message: string, level: LogLevel = LogLevel.Info) {
+export function log(message: string, level: LogLevel = LogLevel.None) {
   return {
     type: CON_LOG,
     message,

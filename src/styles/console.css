@@ -24,6 +24,11 @@
   margin-top: 3px;
 }
 
+.console ul > li > span {
+  display: block;
+  margin-left: 1rem;
+}
+
 li[class*='log-level-'] {
   border-radius: 4px;
   padding: 3px;
@@ -33,7 +38,6 @@ li[class*='log-level-'] {
 
 [class*='log-level-']::before {
   position: relative;
-  top: -1px;
   content: '';
   display: inline-block;
   width: 9px;
@@ -41,13 +45,16 @@ li[class*='log-level-'] {
   border-radius: 50%;
   border-width: 1px;
   margin-right: 6px;
+  margin-top: 4px;
+
+  float: left;
 }
 
-.log-level-info {
+.log-level-none {
   color: #1b9a3c!important;
 }
 
-.log-level-info::before {
+.log-level-none::before {
   display: none;
 }
 
@@ -83,4 +90,15 @@ li[class*='log-level-'] {
 .log-level-success::before {
   background-color: rgba(102, 218, 122, 0.3);
   border-color: rgba(133, 223, 91, 0.849);
+}
+
+
+.log-level-info {
+  color: #83add4!important;
+  background-color: rgba(70, 166, 195, 0.3);
+}
+
+.log-level-info::before {
+  background-color: rgba(103, 190, 241, 0.58);
+  border-color: rgba(91, 203, 223, 0.849);
 }
