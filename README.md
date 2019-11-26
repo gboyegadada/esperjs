@@ -18,22 +18,24 @@ Fun emulation of the ESPER Machine from the photo analysis scene in Blade Runner
 
 :arrow_up: :arrow_down: To move up or down, say "move up" / "move down".
 
-:mag: To zoom, say "zoom in" / "pull in" / "zoom out" / "pull out".
+:mag: To zoom, say "zoom in" / "pull in" / "zoom out" / "pull out" (Chrome only)
 
 :stop_button: To stop, say "stop" / "hold" / "wait"
 
-:x: To eject or close, say "eject" / "close".
+:x: To eject or close, say "eject" / "close" (Chrome only)
 
-:zzz: To shutdown, say "shut down" 
+:zzz: To shutdown, say "shut down" (Chrome only)
 
-:ok: Say "okay" to confirm or "cancel" to abort...
+:ok: Say "yes" / "okay" to confirm or "no" / "cancel" to abort...
 
 
 ---
 
 ### Requirements
 
-This only works in Google Chrome (Win / Mac OS) as of November 22, 2019.
+- This only works in Google Chrome (Win / Mac OS) as of November 22, 2019.
+
+- Limited support added for Safari and others with [Tensorflow Speech Commands](https://github.com/tensorflow/tfjs-models/tree/master/speech-commands).
 
 ![Web Speech API Browser Support](./public/speech-recognition-support.png)
 
