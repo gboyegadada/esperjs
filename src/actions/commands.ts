@@ -30,7 +30,7 @@ export function clearCommands () {
     }
 }
 
-export function invalidCommand (result: SpeechRecognitionResult | null) {
+export function invalidCommand (result: string[] | null) {
     return {
         type: INVALID_COMMAND,
         result,
