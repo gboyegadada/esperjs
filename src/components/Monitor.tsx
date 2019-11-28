@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, ChangeEvent } from 'react';
-import { PowerState, LocationState, ZoomState, UploaderState, UploaderStatus } from '../types/state';
-import { connect, useDispatch } from 'react-redux';
-import { capture } from '../actions/uploader';
+import { PowerState, LocationState, ZoomState, UploaderState, UploaderStatus, AppState } from '../types/state';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { capture, ready } from '../actions/uploader';
 
 import '../styles/monitor.css'
 import Noise from './Noise';
@@ -21,9 +21,15 @@ interface HTMLInputEvent extends ChangeEvent {
   target: HTMLInputElement & EventTarget;
 }
 
-export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Props) {
+export default function Monitor () {
 
   const dispatch = useDispatch()
+  const { 
+    power: { on }, 
+    uploader, 
+    location: l, 
+    zoom: z 
+  }: Props = useSelector((state: AppState) => state)
 
   const frameRef = useRef(null)
   const slideRef = useRef(null)
@@ -55,11 +61,28 @@ export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Prop
   }
   
   useEffect(() => {
-    if (uploader.status === UploaderStatus.Browse) uploaderRef.current.click()
+    if (uploader.status === UploaderStatus.Browse) {
+      uploaderRef.current.click()
+    }
+
+    window.addEventListener('focus', handleWindowFocus)
+
+    return () => {
+      window.removeEventListener('focus', handleWindowFocus)
+    }
   }, [uploader.status])
+
+  const handleWindowFocus = () => {
+    dispatch(ready())
+  }
 
   const handleUpload = (e: HTMLInputEvent) => {
     dispatch(capture(URL.createObjectURL(e.target.files[0])))
+
+    setTimeout(() => {      
+      uploaderRef.current.value = ''
+      dispatch(ready())
+    }, 700)
   } 
 
   return (
@@ -78,5 +101,3 @@ export function Monitor ({ power: { on }, uploader, location: l, zoom: z }: Prop
     </div>
     )
 }
-
-export default connect(({ location, zoom, uploader, power }: { uploader: UploaderState, location: LocationState, zoom: ZoomState, power: PowerState }) => ({ uploader, location, zoom, power }))(Monitor)

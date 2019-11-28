@@ -16,6 +16,12 @@ export const browse = () => {
   }
 }
 
+export const ready = () => {
+  return {
+    type: COM_UPLOADER_READY,
+  }
+}
+
 export const eject = () => {
   return {
     type: COM_UPLOADER_CLEAR,
