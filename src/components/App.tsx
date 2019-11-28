@@ -1,27 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { MdPowerSettingsNew, MdEject } from 'react-icons/md'
 import { AiFillSave } from 'react-icons/ai'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import '../styles/App.css'
 
-import { PowerState, UploaderState } from '../types/state'
-import { Dispatch } from 'redux'
+import { AppState } from '../types/state'
 import { togglePower } from '../actions/power'
 import Console from './Console'
-import Prompt from './Prompt'
 import Monitor from './Monitor'
 import { browse, eject } from '../actions/uploader'
 
-interface Props {
-  power: PowerState
-  uploader: UploaderState
-  dispatch: Dispatch
-}
-
-export class App extends Component<Props> {
-
-  render() {
-      const { power, uploader, dispatch } = this.props
+export default function App () {
+      const power = useSelector((state: AppState) => state.power)
+      const uploader = useSelector((state: AppState) => state.uploader)
+      const dispatch = useDispatch()
 
       return (
         <div className="App vw-75 m-center">
@@ -43,14 +35,9 @@ export class App extends Component<Props> {
                 <MdEject size={25} />
               </div>}
             </div>
-            <Prompt />
             <Monitor />
             { power.on && <Console /> }
           </header>
         </div>
       )
-  }
 }
-
-export default connect(({ power, uploader, dispatch }: { power: PowerState, uploader: UploaderState, dispatch: Dispatch }) => ({ power, uploader, dispatch }))(App)
-
