@@ -198,7 +198,8 @@ code, .code {
 }
 
 .hide {
-  visibility: hidden;
+  opacity: 0.01;
+  z-index: 0;
 }
 
 .collapse {
