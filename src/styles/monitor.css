@@ -16,6 +16,7 @@
   height: 100%;
   position: absolute;
   overflow: hidden;
+  border-radius: 20px;
   z-index: 9000;
 }
 

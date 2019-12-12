@@ -1,7 +1,7 @@
 const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext
 const a = AudioContext ? new AudioContext() : null // browsers limit the number of concurrent audio contexts, so you better re-use'em
 
-export default function beep(vol: number = 25, freq: number = 700, duration: number = 300){
+export default function beep(vol: number = 20, freq: number = 700, duration: number = 300){
   if (!a) {
     console.error('Unable to use AudioContext 😶')
     return
@@ -19,8 +19,8 @@ export default function beep(vol: number = 25, freq: number = 700, duration: num
   v.stop(a.currentTime + duration * 0.001)
 }
 
-export const errorEfx: any[] = [25, 900, 300]
-export const okayEfx: any[] = [25, 700, 300]
+export const errorEfx: any[] = [20, 900, 300]
+export const okayEfx: any[] = [20, 700, 300]
 
 export function okayBeep(count: number = 1) {
     let i = 0
