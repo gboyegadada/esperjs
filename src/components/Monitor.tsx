@@ -1,7 +1,6 @@
-import React, { useRef, useEffect, ChangeEvent } from 'react';
-import { PowerState, LocationState, ZoomState, UploaderState, UploaderStatus, AppState } from '../types/state';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { capture, ready } from '../actions/uploader';
+import React, { useRef } from 'react';
+import { PowerState, LocationState, ZoomState, UploaderState, AppState } from '../types/state';
+import { useDispatch, useSelector } from 'react-redux';
 
 import '../styles/monitor.css'
 import Noise from './Noise';
@@ -17,13 +16,8 @@ interface Props {
   zoom: ZoomState
 }
 
-interface HTMLInputEvent extends ChangeEvent {
-  target: HTMLInputElement & EventTarget;
-}
-
 export default function Monitor () {
 
-  const dispatch = useDispatch()
   const { 
     power: { on }, 
     uploader, 
@@ -33,7 +27,6 @@ export default function Monitor () {
 
   const frameRef = useRef(null)
   const slideRef = useRef(null)
-  const uploaderRef = useRef(null)
 
   const scale = z.scale / 100 // 120% eq 1.2x ... 150% eq 1.5x ... 70% eq 0.7x ... e.t.c
   const ratio = 1.6
@@ -59,31 +52,6 @@ export default function Monitor () {
     ew: l.x,
     ns: l.y,
   }
-  
-  useEffect(() => {
-    if (uploader.status === UploaderStatus.Browse) {
-      uploaderRef.current.click()
-    }
-
-    window.addEventListener('focus', handleWindowFocus)
-
-    return () => {
-      window.removeEventListener('focus', handleWindowFocus)
-    }
-  }, [uploader.status])
-
-  const handleWindowFocus = () => {
-    dispatch(ready())
-  }
-
-  const handleUpload = (e: HTMLInputEvent) => {
-    dispatch(capture(URL.createObjectURL(e.target.files[0])))
-
-    setTimeout(() => {      
-      uploaderRef.current.value = ''
-      dispatch(ready())
-    }, 700)
-  } 
 
   return (
     <div className='monitor w-100 mt-2'>
@@ -97,7 +65,6 @@ export default function Monitor () {
         { on && <Noise uploader={uploader} /> }
         { on && uploader.file && <Readout {...readoutProps}/> }
       </div>
-      <input type="file" className='hide' accept="image/*" style={{position: "absolute", top: "20px"}} ref={uploaderRef} onChange={handleUpload}/>
     </div>
     )
 }
